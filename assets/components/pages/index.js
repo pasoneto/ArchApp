@@ -18,9 +18,8 @@ const FrontPage = (props) => {
 
         <View style={styles.titles}>
           <Text style={styles.title}>{name}</Text>
-          <CtaButton style={styles.CTAbutton} 
-                  content={CTA}
-                  whereto={"Partituras"}/>
+          {props.artist.first == 'false' && <CtaButton style={styles.CTAbutton} content={CTA} whereto={"Partituras"}/>}
+          {props.artist.first == 'true' && <Text style={styles.subtitle}>{CTA}</Text>}
         </View>
       
       {props.artist.first == 'true' && <ButtonStyled type= "primary" content={'Entrar'} whereto={'Login'}/>}
