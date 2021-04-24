@@ -1,10 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
-    page: {
-        width: '100%',
-        height: Dimensions.get('screen').height
-    },
     titles: {
         marginTop: '45%',
         width: Dimensions.get('window').width,
@@ -31,10 +27,6 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         position: 'absolute',
         flexWrap: 'wrap',
-    },
-    CTA: {
-        textDecorationLine: 'underline',
-        fontSize: 20
     },
     container: {
         flex: 1,
@@ -76,11 +68,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: "black",
       },
-      CTAbutton: {
-        margin: "10%",
-        // backgroundColor: 'red',
-        // color: 'red',
-      }
 });
 
 export default styles

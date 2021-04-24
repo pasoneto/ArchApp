@@ -3,19 +3,19 @@ import {View, Text, Pressable} from 'react-native';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
 
-const ButtonStyled = (props) => {
+const CtaButton = (props) => {
 
     const navigation = useNavigation();
     const whereto = props.whereto
     const {type, content} = props;
-    const bgcolor = type == 'primary' ? '#171A20CC' : '#FFFFFFA6';
-    const textcol = type == 'primary' ? '#FFFFFF' : '#171A20CC' 
+    const bgcolor = type == 'primary' ? '#transparent' : '#FFFFFFA6';
+    const textcol = type == 'primary' ? '#red' : '#171A20CC' 
 
 
     return(
         // <View style={styles.container}>
             <Pressable 
-                style={[styles.button, {backgroundColor: bgcolor}]}
+                style={[styles.CTAbutton, {backgroundColor: bgcolor}]}
                 onPress={() => navigation.navigate(whereto)}
             >
                 <Text style={[styles.text, {color: textcol}]}>{content}</Text>
@@ -25,4 +25,4 @@ const ButtonStyled = (props) => {
     );
 }
 
-export default ButtonStyled;
+export default CtaButton;

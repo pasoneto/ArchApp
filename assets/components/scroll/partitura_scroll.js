@@ -1,16 +1,16 @@
 import React from 'react';
-import {View, Text, FlatList, Dimensions} from 'react-native';
+import {View, FlatList, Dimensions} from 'react-native';
 import styles from '../pages/styles';
-import lista_info from '../data/lista_info'
-import FrontPage from '../pages/'
+import artist_data from '../data/artist_data'
+import Partituras from '../partituras';
 
-const ArtistList = (props) => {
+const PartituraList = (props) => {
 
     return(
         <View style={styles.page}>
             <FlatList
-                data={lista_info}
-                renderItem={({item}) => <FrontPage artist={item} />}
+                data={artist_data}
+                renderItem={({item}) => <Partituras artist={item} />}
                 snapToAlignment={'start'}
                 decelerationRate={'fast'}
                 snapToInterval={Dimensions.get('screen').height}
@@ -19,4 +19,4 @@ const ArtistList = (props) => {
     );
 }
  
-export default ArtistList;
+export default PartituraList;
