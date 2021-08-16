@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Button, ImageBackground} from 'react-native';
-import ButtonStyled from '../button';
-import CtaButton from '../button/buttonCTA';
+import ButtonStyled from '../../buttons/buttonFront';
+import CtaButton from '../../buttons/buttonCTA';
 import styles from './styles';
 
 const FrontPage = (props) => {
@@ -21,7 +21,7 @@ const FrontPage = (props) => {
           {props.artist.first == 'false' && <CtaButton style={styles.CTAbutton} content={CTA} whereto={"Partituras"}/>}
           {props.artist.first == 'true' && <Text style={styles.subtitle}>{CTA}</Text>}
         </View>
-      
+
       {props.artist.first == 'true' && <ButtonStyled type= "primary" content={'Entrar'} whereto={'Login'}/>}
       {props.artist.first == 'true' && <ButtonStyled type= "secondary" content={'Registrar'} whereto={'Login'} />}
       

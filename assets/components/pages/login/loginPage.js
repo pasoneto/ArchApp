@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Dimensions, Text, View, ImageBackground, TextInput, TouchableOpacity} from 'react-native';
 import styles from './styles';
+import addPerson from "../../auth.js"
 
 function LogIn(props) {
 
-    const image = require('../../images/loginBG.jpg') 
-    const [email, setEmail] = useState('');
+    const image = require('../../../images/loginBG.jpg') 
+    const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
+    const [password2, setPassword2] = useState('');
     
     return (
 
@@ -22,17 +24,25 @@ function LogIn(props) {
 
         <TextInput
             style={styles.TextInput}
-            placeholder="Email"
+            placeholder="Usuário"
             placeholderTextColor="#003f5c"
-            onChangeText={(email) => setEmail(email)}
+            onChangeText={(user) => setUser(user)}
         />
  
         <TextInput
             style={styles.TextInput}
-            placeholder="Password"
+            placeholder="Senha"
             placeholderTextColor="#003f5c"
             secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
+        />
+
+        <TextInput
+            style={styles.TextInput}
+            placeholder="Repita a senha"
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            onChangeText={(password2) => setPassword2(password2)}
         />
         
       <TouchableOpacity 
@@ -43,12 +53,10 @@ function LogIn(props) {
  
       <TouchableOpacity 
         style={styles.loginBtn}
-        onPress={() => console.warn([email, password])}>
+        onPress={() => addPerson(user, password, password2)}>
             <Text style={styles.logintext}>Entrar</Text>
       </TouchableOpacity>
       
- 
-
     </View>
 
     );
