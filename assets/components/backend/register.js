@@ -20,7 +20,7 @@ export const addPerson = async (user, password, password2) => {
     const newPerson = new Parse.Object('Person');
     //define the attributes you want for your Object
     if (password.valueOf() == password2.valueOf()){
-      newPerson.set('name', user);
+      newPerson.set('user', user);
       newPerson.set('password', password);
       //save it on Back4App Data Store
       await newPerson.save();

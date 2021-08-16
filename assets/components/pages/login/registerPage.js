@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Dimensions, Text, View, ImageBackground, TextInput, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import authLogin from "../../backend/authLogin.js"
+import addPerson from "../../backend/register.js"
 
-function LogIn(props) {
+function registerPage(props) {
 
     const image = require('../../../images/loginBG.jpg') 
     const [user, setUser] = useState('');
@@ -37,15 +37,17 @@ function LogIn(props) {
             onChangeText={(password) => setPassword(password)}
         />
 
-      <TouchableOpacity 
-        style={styles.forgot_button}
-        onPress={() => console.warn("Esqueceu pae")}>
-            <Text style={styles.subtitle}>Esqueceu a senha?</Text>
-      </TouchableOpacity>
- 
+        <TextInput
+            style={styles.TextInput}
+            placeholder="Repita a senha"
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            onChangeText={(password2) => setPassword2(password2)}
+        />
+        
       <TouchableOpacity 
         style={styles.loginBtn}
-        onPress={() => authLogin(user, password)}>
+        onPress={() => addPerson(user, password, password2)}>
             <Text style={styles.logintext}>Entrar</Text>
       </TouchableOpacity>
       
@@ -54,4 +56,4 @@ function LogIn(props) {
     );
 }
 
-export default LogIn;
+export default registerPage;

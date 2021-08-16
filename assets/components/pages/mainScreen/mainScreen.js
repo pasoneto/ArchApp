@@ -23,7 +23,7 @@ const FrontPage = (props) => {
         </View>
 
       {props.artist.first == 'true' && <ButtonStyled type= "primary" content={'Entrar'} whereto={'Login'}/>}
-      {props.artist.first == 'true' && <ButtonStyled type= "secondary" content={'Registrar'} whereto={'Login'} />}
+      {props.artist.first == 'true' && <ButtonStyled type= "secondary" content={'Registrar'} whereto={'Register'} />}
       
       </View>
     );
