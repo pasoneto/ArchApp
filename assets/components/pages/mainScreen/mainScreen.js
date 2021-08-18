@@ -5,7 +5,7 @@ import CtaButton from '../../buttons/buttonCTA';
 import styles from './styles';
 
 const FrontPage = (props) => {
-
+    
     const {name, CTA, image} = props.artist
 
     return(
@@ -18,7 +18,7 @@ const FrontPage = (props) => {
 
         <View style={styles.titles}>
           <Text style={styles.title}>{name}</Text>
-          {props.artist.first == 'false' && <CtaButton style={styles.CTAbutton} content={CTA} whereto={"Partituras"}/>}
+          {props.artist.first == 'false' && <CtaButton style={styles.CTAbutton} content={CTA} whereto={"Partituras"} name={name}/>}
           {props.artist.first == 'true' && <Text style={styles.subtitle}>{CTA}</Text>}
         </View>
 
