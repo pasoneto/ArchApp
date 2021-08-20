@@ -3,6 +3,7 @@ import Parse from 'parse/react-native.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 import React, { useState } from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 //Initializing the SDK
 Parse.setAsyncStorage(AsyncStorage);
@@ -38,7 +39,7 @@ const doUserRegistration = async function (user, password, email) {
       // safely log in again after verifying
       await Parse.User.logOut();
       // Go back to the login page
-      navigation.dispatch(StackActions.popToTop());
+      //navigation.dispatch(StackActions.popToTop());
       return true;
     })
     .catch((error) => {
