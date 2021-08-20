@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Dimensions, Text, View, ImageBackground, TextInput, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import authLogin from "../../backend/authLogin.js"
+import { doUserLogIn } from "../../backend/authLogin.js"
+import { useNavigation } from '@react-navigation/core';
 
 function LogIn(props) {
 
     const image = require('../../../images/loginBG.jpg') 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
-    const [password2, setPassword2] = useState('');
-    
+
     return (
 
         <View style={styles.container}>
@@ -26,6 +26,7 @@ function LogIn(props) {
             style={styles.TextInput}
             placeholder="Usuário"
             placeholderTextColor="#003f5c"
+            autoCapitalize={"none"}
             onChangeText={(user) => setUser(user)}
         />
  
@@ -33,6 +34,7 @@ function LogIn(props) {
             style={styles.TextInput}
             placeholder="Senha"
             placeholderTextColor="#003f5c"
+            autoCapitalize={"none"}
             secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
         />
@@ -45,7 +47,7 @@ function LogIn(props) {
  
       <TouchableOpacity 
         style={styles.loginBtn}
-        onPress={() => authLogin(user, password)}>
+        onPress={() => doUserLogIn(user, password)}>
             <Text style={styles.logintext}>Entrar</Text>
       </TouchableOpacity>
       

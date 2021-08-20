@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Dimensions, Text, View, ImageBackground, TextInput, TouchableOpacity} from 'react-native';
 import styles from './styles';
-import addPerson from "../../backend/register.js"
+import doUserRegistration from "../../backend/register.js"
 
 function registerPage(props) {
 
     const image = require('../../../images/loginBG.jpg') 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
-    const [password2, setPassword2] = useState('');
+    const [email, setEmail] = useState('');
     
     return (
 
@@ -25,6 +25,7 @@ function registerPage(props) {
         <TextInput
             style={styles.TextInput}
             placeholder="Usuário"
+            autoCapitalize={"none"}
             placeholderTextColor="#003f5c"
             onChangeText={(user) => setUser(user)}
         />
@@ -34,21 +35,22 @@ function registerPage(props) {
             placeholder="Senha"
             placeholderTextColor="#003f5c"
             secureTextEntry={true}
+            autoCapitalize={"none"}
             onChangeText={(password) => setPassword(password)}
         />
 
         <TextInput
             style={styles.TextInput}
-            placeholder="Repita a senha"
+            placeholder="E-mail"
             placeholderTextColor="#003f5c"
-            secureTextEntry={true}
-            onChangeText={(password2) => setPassword2(password2)}
+            autoCapitalize={"none"}
+            onChangeText={(email) => setEmail(email)}
         />
         
       <TouchableOpacity 
         style={styles.loginBtn}
-        onPress={() => addPerson(user, password, password2)}>
-            <Text style={styles.logintext}>Entrar</Text>
+        onPress={() => doUserRegistration(user, password, email)}>
+            <Text style={styles.logintext}>Registrar</Text>
       </TouchableOpacity>
       
     </View>

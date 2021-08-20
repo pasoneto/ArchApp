@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationContainer  } from '@react-navigation/native';
+import { NavigationContainer, useNavigation  } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ArtistList from './screenLists/artistList'
 import LogIn from '../pages/login/loginPage'
@@ -9,6 +9,7 @@ import registerPage from '../pages/login/registerPage'
 const Stack = createStackNavigator();
 
 const OverallRoute = (props) =>{
+
     return(
     <NavigationContainer>
        <Stack.Navigator>

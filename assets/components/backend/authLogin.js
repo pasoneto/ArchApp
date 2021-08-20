@@ -1,6 +1,7 @@
 // In a React Native application
 import Parse from 'parse/react-native.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 import React, { useState } from 'react';
 
 //Initializing the SDK
@@ -14,19 +15,28 @@ Parse.initialize(app_id, js_key);
 //Point to Back4App Parse API address 
 Parse.serverURL = 'https://parseapi.back4app.com/';
 
-//This function will retrieve a Person which the name is John
-export const authLogin = async (user, password) => {
+const doUserLogIn = async function (user, password) {
+  // Note that these values come from state variables that we've declared before
+  const usernameValue = user;
+  const passwordValue = password;
+  return await Parse.User.logIn(usernameValue, passwordValue)
+    .then(async (loggedInUser) => {
+      // logIn returns the corresponding ParseUser object
+      Alert.alert(
+        'Success!',
+        `User ${loggedInUser.get('username')} has successfully signed in!`,
+      );
+      // To verify that this is in fact the current user, currentAsync can be used
+      const currentUser = await Parse.User.currentAsync();
+      console.log(loggedInUser === currentUser);
+      return true;
+    })
+    .catch((error) => {
+      // Error can be caused by wrong parameters or lack of Internet connection
+      Alert.alert('Error!', error.message);
+      return false;
+    });
+};
 
-//Este codigo lê os dados do banco de dados. Agora eu preciso verificar se o email/senha dele sao iguais ao que ele passa no app 
 
-      //create your Parse Query using the Person Class you've created
-      let query = new Parse.Query('Person');
-      //run the query to retrieve all objects on Person class, optionally you can add your filters
-      let queryResult = await query.findAll();
-      //pick the first result 
-      const currentPerson = queryResult[1];
-      //access the Parse Object attributes
-      console.log('user: ', currentPerson.get('user'));
-      console.log('password: ', currentPerson.get('password'));
-  }
-  export default authLogin;
+export default doUserLogIn;
