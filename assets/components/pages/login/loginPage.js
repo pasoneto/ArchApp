@@ -1,8 +1,6 @@
 import { Alert, StyleSheet, Dimensions, Text, View, ImageBackground, TextInput, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
-import ArtistList from '../../routes/screenLists/artistList';
-import OverallRoute from '../../routes/overallRoute';
 import React, {FC, ReactElement, useEffect, useState} from 'react';
 import Parse from 'parse/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -37,7 +35,7 @@ const LogIn = (props) => {
          // To verify that this is in fact the current user, currentAsync can be used
          const currentUser = await Parse.User.currentAsync();
          console.log(loggedInUser === currentUser);
-         navigation.navigate("Home");
+         navigation.navigate("Welcome", {currentUser: currentUser});
          return true;
        })
        .catch((error) => {
@@ -46,7 +44,6 @@ const LogIn = (props) => {
          return false;
        });
    };
-
 
     return (
 

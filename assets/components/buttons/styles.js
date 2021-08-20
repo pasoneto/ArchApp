@@ -16,11 +16,21 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     text: {
-        fontSize: 16,
+        fontSize: 15,
+        alignSelf: 'center',
         fontWeight: 'bold',
         textTransform: 'uppercase'
-    }
-
+    },
+    button_data: {
+        backgroundColor: "pink",
+        padding: 18,
+        width: '46%',
+        height: 60,
+        borderWidth: 5,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        height: "100%"
+  },
 });
 
 export default styles;

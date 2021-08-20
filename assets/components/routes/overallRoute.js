@@ -5,6 +5,7 @@ import ArtistList from './screenLists/artistList'
 import LogIn from '../pages/login/loginPage'
 import PartituraList from './screenLists/partituraList'
 import registerPage from '../pages/login/registerPage'
+import WelcomePage from '../pages/artistPage/welcomePage';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ const OverallRoute = (props) =>{
          <Stack.Screen name="Home" component={ArtistList}  options={{ headerShown: false }} />
          <Stack.Screen name="Login" component={LogIn} options={{headerShown: false}} />
          <Stack.Screen name="Register" component={registerPage} options={{headerShown: false}} />
+         <Stack.Screen name="Welcome" component={WelcomePage} options={{headerShown: false}}/>
          <Stack.Screen name="Partituras" component={PartituraList} />
        </Stack.Navigator>
     </NavigationContainer>
