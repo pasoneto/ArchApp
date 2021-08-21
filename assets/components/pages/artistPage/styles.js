@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
         textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 2,
     },
+    hellomessage: {
+        fontSize: 15,
+        color: 'black',
+        textAlign: "left" 
+    },
     image: {
         width: '100%', // Dimensions.get('screen').width,
         height: Dimensions.get('screen').height,
@@ -34,11 +39,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: "blue",
-        justifyContent: "flex-start"
       },
-    container2: {
-        flex: 1
-    },
     TextInput: {
         color: 'black',
         backgroundColor: 'white',
@@ -77,7 +78,14 @@ const styles = StyleSheet.create({
         flex: 2,
         backgroundColor: "red",
         width: "97%",
-        alignSelf: "center"
+        alignSelf: "center",
+        alignItems: "center",
+        borderColor:'black',
+        borderWidth: 5,
+    },
+    artistdata: {
+        alignSelf: "center",
+        justifyContent: "flex-start"
     },
     logoutcontainer: {
         flex: 0.1,
@@ -86,10 +94,16 @@ const styles = StyleSheet.create({
         backgroundColor: "white"
     },
     welcometitles: {
-        flex: 0.07,
+        flex: 0.8,
+        paddingTop: 28,
         alignItems: "center",
-        padding: 50,
-        backgroundColor: "lightblue"
+        backgroundColor: "lightblue",
+    },
+    savebutton: {
+        backgroundColor: "green",
+        width: "70%",
+        alignSelf: "center",
+        bottom: -160,
     },
 });
 

@@ -1,11 +1,12 @@
 import React, {FC, ReactElement} from 'react';
-import {Alert, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Parse from 'parse/react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackActions} from '@react-navigation/native';
 import styles from './styles';
-import HelloUser from './helloUser';
+import UserName from './userName';
 import ButtonData from '../../buttons/buttonData';
+import ArtistData from './artistData';
 
 export const WelcomePage = () => {
   const navigation = useNavigation();
@@ -33,7 +34,8 @@ export const WelcomePage = () => {
     <View style={styles.container}>
         
         <View style={styles.welcometitles}>
-          <HelloUser/>
+          <Text style={styles.title}>ArchVix</Text>
+          <Text style={styles.subtitle}>O aplicativo da música capixaba</Text>
         </View>
         
         <View style={styles.buttoncontainer}>
@@ -44,8 +46,10 @@ export const WelcomePage = () => {
         </View>
 
         <View style={styles.render}>
+          <Text>Olá, <UserName/>,
+          \n Aqui você pode gerenciar suas informaçoes pessoais e partituras</Text>
+          <ArtistData style={styles.artistdata}/>
         </View>
-
 
         <View style={styles.logoutcontainer}>
           <TouchableOpacity style={styles.logoutBtn} onPress={() => doUserLogOut()}>

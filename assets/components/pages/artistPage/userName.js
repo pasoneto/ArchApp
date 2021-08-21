@@ -3,7 +3,7 @@ import {Text, View} from 'react-native';
 import Parse from 'parse/react-native';
 import styles from './styles';
 
-export const HelloUser = () => {
+export const UserName = () => {
   // State variable that will hold username value
   const [username, setUsername] = useState('');
 
@@ -28,11 +28,7 @@ export const HelloUser = () => {
   // Note the condition operator here, so the "Hello" text is only
   // rendered if there is an username value
   return (
-    <View >
-      <View >
-        {username !== '' && <Text style={styles.subtitle}>{`Olá, ${username}!`}</Text>}
-      </View>
-    </View>
+        <Text>{username}</Text>
   );
 };
-export default HelloUser;
+export default UserName;
