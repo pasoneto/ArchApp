@@ -79,13 +79,13 @@ const styles = StyleSheet.create({
         backgroundColor: "red",
         width: "97%",
         alignSelf: "center",
-        alignItems: "center",
         borderColor:'black',
         borderWidth: 5,
     },
     artistdata: {
+        flex: 2.5,
         alignSelf: "center",
-        justifyContent: "flex-start"
+        alignItems: "center",
     },
     logoutcontainer: {
         flex: 0.1,
@@ -97,14 +97,39 @@ const styles = StyleSheet.create({
         flex: 0.8,
         paddingTop: 28,
         alignItems: "center",
+        justifyContent: "center",
         backgroundColor: "lightblue",
     },
     savebutton: {
         backgroundColor: "green",
-        width: "70%",
+        width: "30%",
+        marginBottom: 15,
         alignSelf: "center",
-        bottom: -160,
+        alignItems: "center",
     },
+    welcomemessage: {
+        fontSize: 16,
+        color: 'black',
+        paddingBottom: 25,
+        paddingTop: 15,
+        textShadowColor: 'rgba(0, 0, 0, 0.75)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 1,
+        justifyContent: 'center',
+        textAlign: 'center'
+    },
+    TextInputArtist: {
+        color: 'black',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        margin: 5,
+        textAlign: 'center',
+        textShadowColor: 'rgba(0, 0, 0, 0.75)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 10,
+        width: Dimensions.get("screen").width*0.8,
+        height: 45,
+      }, 
 });
 
 export default styles

@@ -4,7 +4,7 @@ import styles from './styles';
 
 const ButtonData = ({text, color}) => {
   return (
-    <TouchableOpacity style={[styles.button_data, {backgroundColor: color}]}>
+    <TouchableOpacity style={[styles.button_data, {backgroundColor: color}]} >
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );

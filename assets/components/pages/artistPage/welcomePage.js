@@ -8,9 +8,9 @@ import UserName from './userName';
 import ButtonData from '../../buttons/buttonData';
 import ArtistData from './artistData';
 
-export const WelcomePage = () => {
+export const WelcomePage = (props) => {
   const navigation = useNavigation();
-
+  console.log(props)
   const doUserLogOut = async function () {
     return await Parse.User.logOut()
       .then(async () => {
@@ -46,9 +46,17 @@ export const WelcomePage = () => {
         </View>
 
         <View style={styles.render}>
-          <Text>Olá, <UserName/>,
-          \n Aqui você pode gerenciar suas informaçoes pessoais e partituras</Text>
-          <ArtistData style={styles.artistdata}/>
+          <Text style={styles.welcomemessage}>Olá, <UserName/>,
+            Aqui você pode gerenciar suas informaçoes pessoais e partituras
+          </Text>
+        
+        {<ArtistData style={styles.artistdata}/>}
+
+	        <TouchableOpacity 
+            style={styles.savebutton}
+            onPress={() => console.warn("Salvar dados")}>
+            <Text style={styles.subtitle}>Salvar</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.logoutcontainer}>
