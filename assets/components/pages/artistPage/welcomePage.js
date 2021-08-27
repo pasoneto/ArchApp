@@ -1,4 +1,4 @@
-import React, {FC, ReactElement} from 'react';
+import React, {FC, useState, ReactElement} from 'react';
 import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Parse from 'parse/react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -7,6 +7,7 @@ import styles from './styles';
 import UserName from './userName';
 import ButtonData from '../../buttons/buttonData';
 import ArtistData from './artistData';
+import ArtistPartitura from './artistPartiture';
 
 export const WelcomePage = (props) => {
   const navigation = useNavigation();
@@ -30,6 +31,10 @@ export const WelcomePage = (props) => {
       });
   };
 
+  const [valor, setValor] = useState(true); 
+  const [color1, setColor1] = useState("blue");
+  const [color2, setColor2] = useState("pink");
+
   return (
     <View style={styles.container}>
         
@@ -40,17 +45,19 @@ export const WelcomePage = (props) => {
         
         <View style={styles.buttoncontainer}>
           <View style={styles.buttons_wrap}>
-            <ButtonData text={"Partituras"} color={"pink"}/>
-            <ButtonData text={"Dados"} color={"pink"}/>
+            <ButtonData text={"Partituras"} color={color1} onPress={() => {setValor(true); setColor1("blue"); setColor2("pink")} } />
+            <ButtonData text={"Dados"} color={color2} onPress={() => {setValor(false); setColor1("pink"); setColor2("blue")}}/>
           </View>
         </View>
 
+
+{!valor &&
         <View style={styles.render}>
-          <Text style={styles.welcomemessage}>Olá, <UserName/>,
-            Aqui você pode gerenciar suas informaçoes pessoais e partituras
+          <Text style={styles.welcomemessage}> 
+            Adicione suas informaçoes pessoais.
           </Text>
-        
-        {<ArtistData style={styles.artistdata}/>}
+
+          <ArtistData style={styles.artistdata}/>
 
 	        <TouchableOpacity 
             style={styles.savebutton}
@@ -58,7 +65,27 @@ export const WelcomePage = (props) => {
             <Text style={styles.subtitle}>Salvar</Text>
           </TouchableOpacity>
         </View>
+}
 
+{valor &&
+        <View style={styles.render}>
+          <Text style={styles.welcomemessage}> 
+            Adicione a partitura e informações sobre a música. 
+          </Text>
+
+          <ArtistPartitura/>
+
+	        <TouchableOpacity 
+            style={styles.savebutton}
+            onPress={() => console.warn("Salvar dados")}>
+            <Text style={styles.subtitle}>Salvar</Text>
+          </TouchableOpacity>
+        </View>
+}
+        
+        
+        
+        
         <View style={styles.logoutcontainer}>
           <TouchableOpacity style={styles.logoutBtn} onPress={() => doUserLogOut()}>
             <View >

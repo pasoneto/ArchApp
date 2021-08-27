@@ -1,7 +1,6 @@
-import React, {FC, ReactElement, useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import React, {ReactElement, useEffect, useState} from 'react';
+import {Text} from 'react-native';
 import Parse from 'parse/react-native';
-import styles from './styles';
 
 export const UserName = () => {
   // State variable that will hold username value
