@@ -11,7 +11,7 @@ import ArtistPartitura from './artistPartiture';
 
 export const WelcomePage = (props) => {
   const navigation = useNavigation();
-  console.log(props)
+  // console.log(props)
   const doUserLogOut = async function () {
     return await Parse.User.logOut()
       .then(async () => {
@@ -45,8 +45,16 @@ export const WelcomePage = (props) => {
         
         <View style={styles.buttoncontainer}>
           <View style={styles.buttons_wrap}>
-            <ButtonData text={"Partituras"} color={color1} onPress={() => {setValor(true); setColor1("blue"); setColor2("pink")} } />
-            <ButtonData text={"Dados"} color={color2} onPress={() => {setValor(false); setColor1("pink"); setColor2("blue")}}/>
+            <ButtonData 
+              text={"Partituras"} 
+              color={color1} 
+              onPress={() => {setValor(true); setColor1("blue"); setColor2("pink")} }
+            />
+            <ButtonData 
+              text={"Dados"}
+              color={color2}
+              onPress={() => {setValor(false); setColor1("pink"); setColor2("blue")}}
+            />
           </View>
         </View>
 
@@ -56,14 +64,7 @@ export const WelcomePage = (props) => {
           <Text style={styles.welcomemessage}> 
             Adicione suas informaçoes pessoais.
           </Text>
-
           <ArtistData style={styles.artistdata}/>
-
-	        <TouchableOpacity 
-            style={styles.savebutton}
-            onPress={() => console.warn("Salvar dados")}>
-            <Text style={styles.subtitle}>Salvar</Text>
-          </TouchableOpacity>
         </View>
 }
 
@@ -72,20 +73,10 @@ export const WelcomePage = (props) => {
           <Text style={styles.welcomemessage}> 
             Adicione a partitura e informações sobre a música. 
           </Text>
-
           <ArtistPartitura/>
-
-	        <TouchableOpacity 
-            style={styles.savebutton}
-            onPress={() => console.warn("Salvar dados")}>
-            <Text style={styles.subtitle}>Salvar</Text>
-          </TouchableOpacity>
         </View>
 }
-        
-        
-        
-        
+
         <View style={styles.logoutcontainer}>
           <TouchableOpacity style={styles.logoutBtn} onPress={() => doUserLogOut()}>
             <View >

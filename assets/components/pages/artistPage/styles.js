@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         borderWidth: 5,
     },
     artistdata: {
-        flex: 2.5,
+        flex: 2,
         alignSelf: "center",
         alignItems: "center",
     },
@@ -103,9 +103,7 @@ const styles = StyleSheet.create({
     savebutton: {
         backgroundColor: "green",
         width: "30%",
-        marginBottom: 15,
-        alignSelf: "center",
-        alignItems: "center",
+        marginTop: 20
     },
     welcomemessage: {
         fontSize: 16,
