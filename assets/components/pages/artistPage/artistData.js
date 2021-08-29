@@ -10,8 +10,6 @@ export const ArtistData = () => {
     const [spotify, setSpotify] = useState('');
     const [site, setSite] = useState('');
 
-
-
     const doUserData = async function addPerson(name, genero, spotify, site) {
 
         const nameValue = name;
@@ -29,6 +27,7 @@ export const ArtistData = () => {
             newPerson.set('site', siteValue);
             //save it on Back4App Data Store
             await newPerson.save();
+            Alert.alert("Dados salvos :D")
             } catch (error) {
                 console.log('Error saving new person: ', error);
             }
@@ -36,6 +35,10 @@ export const ArtistData = () => {
 
   return (
     <View style={styles.artistdata}>
+        <Text>
+            dados
+        </Text>
+
         <TextInput
             style={styles.TextInputArtist}
             placeholder="Nome"
@@ -66,7 +69,7 @@ export const ArtistData = () => {
 
         <TouchableOpacity 
             style={styles.savebutton}
-            onPress={() => doUserData(name, genero)}>
+            onPress={() => doUserData(name, genero, spotify, site)}>
             <Text style={styles.subtitle}>Salvar</Text>
         </TouchableOpacity>
 
