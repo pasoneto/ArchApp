@@ -1,5 +1,5 @@
 import React, {FC, useState, ReactElement} from 'react';
-import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Alert, Text, ImageBackground, TextInput, TouchableOpacity, View} from 'react-native';
 import Parse from 'parse/react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackActions} from '@react-navigation/native';
@@ -12,6 +12,8 @@ import ArtistPartitura from './artistPartiture';
 export const WelcomePage = (props) => {
   const navigation = useNavigation();
   // console.log(props)
+
+  const image = require('../../../images/loginBG.jpg') 
   const doUserLogOut = async function () {
     return await Parse.User.logOut()
       .then(async () => {
@@ -33,11 +35,13 @@ export const WelcomePage = (props) => {
 
   const [valor, setValor] = useState(true); 
   const [color1, setColor1] = useState("blue");
-  const [color2, setColor2] = useState("pink");
+  const [color2, setColor2] = useState("lightblue");
 
   return (
     <View style={styles.container}>
         
+        <ImageBackground source={image} style={styles.image2}/>
+
         <View style={styles.welcometitles}>
           <Text style={styles.title}>ArchVix</Text>
           <Text style={styles.subtitle}>O aplicativo da música capixaba</Text>
@@ -48,16 +52,15 @@ export const WelcomePage = (props) => {
             <ButtonData 
               text={"Partituras"} 
               color={color1} 
-              onPress={() => {setValor(true); setColor1("blue"); setColor2("pink")} }
+              onPress={() => {setValor(true); setColor1("blue"); setColor2("lightblue")} }
             />
             <ButtonData 
               text={"Dados"}
               color={color2}
-              onPress={() => {setValor(false); setColor1("pink"); setColor2("blue")}}
+              onPress={() => {setValor(false); setColor1("lightblue"); setColor2("blue")}}
             />
           </View>
         </View>
-
 
 {!valor &&
         <View style={styles.render}>
@@ -76,16 +79,11 @@ export const WelcomePage = (props) => {
           <ArtistPartitura/>
         </View>
 }
-
-        <View style={styles.logoutcontainer}>
           <TouchableOpacity style={styles.logoutBtn} onPress={() => doUserLogOut()}>
             <View >
               <Text style={styles.logintext} >{'Logout'}</Text>
             </View>
           </TouchableOpacity>
-        </View>
-      
-
     </View>
   );
 };

@@ -34,6 +34,12 @@ const styles = StyleSheet.create({
         position: 'absolute',
         flexWrap: 'wrap',
     },
+    image2: {
+        width: '100%', // Dimensions.get('screen').width,
+        height: Dimensions.get('screen').height,
+        position: 'absolute',
+        resizeMode: 'cover'
+    },
     container: {  
         height: '100%',
         display: 'flex',
@@ -61,44 +67,53 @@ const styles = StyleSheet.create({
    logoutBtn: {
         borderRadius: 15,
         width: "40%",
+        margin: 20,
+        padding: 5,
         color: 'white',
         alignSelf: "center",
         justifyContent: "center",
         backgroundColor: "lightblue",
-    },
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+        overflow: 'visible',
+        elevation: 24,
+        },
     buttons_wrap: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        width: '104.5%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        borderBottomColor: 'red',
    },
     buttoncontainer: {
         flex: 0.28,
     },
     render: {
         flex: 2,
-        backgroundColor: "red",
-        width: "97%",
+        backgroundColor: "lightblue",
+        width: "96%",
         alignSelf: "center",
         borderColor:'black',
-        borderWidth: 5,
+        borderLeftWidth: 5,
+        borderRightWidth: 5,
+        borderBottomWidth: 5,
     },
     artistdata: {
         flex: 2,
         alignSelf: "center",
         alignItems: "center",
     },
-    logoutcontainer: {
-        flex: 0.1,
-        padding: 20,
-        alignItems: "center",
-        backgroundColor: "white"
-    },
     welcometitles: {
         flex: 0.8,
         paddingTop: 28,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "lightblue",
     },
     savebutton: {
         backgroundColor: "green",
