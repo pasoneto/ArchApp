@@ -3,6 +3,7 @@ import {View, Text, Button, ImageBackground} from 'react-native';
 import ButtonStyled from '../../buttons/buttonFront';
 import CtaButton from '../../buttons/buttonCTA';
 import styles from './styles';
+import ArrowUp from '../../animations/arrow';
 
 const FrontPage = (props) => {
     
@@ -22,9 +23,10 @@ const FrontPage = (props) => {
           {props.artist.first == 'true' && <Text style={styles.subtitle}>{CTA}</Text>}
         </View>
 
+      {props.artist.first == 'true' && <ArrowUp/>}
       {props.artist.first == 'true' && <ButtonStyled type= "primary" content={'Entrar'} whereto={'Login'}/>}
       {props.artist.first == 'true' && <ButtonStyled type= "secondary" content={'Registrar'} whereto={'Register'} />}
-      
+
       </View>
     );
 }
