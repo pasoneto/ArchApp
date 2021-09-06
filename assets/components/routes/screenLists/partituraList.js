@@ -19,7 +19,6 @@ const PartituraList = (props) => {
             />
         </View>
     );
-  console.log(props.artist)
 }
 
 export default PartituraList;

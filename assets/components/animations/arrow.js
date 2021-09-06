@@ -2,8 +2,7 @@ import React, { useState, useRef, Component } from 'react';
 import styles from './styles';
 import { Ionicons } from '@expo/vector-icons';
 import { Animated, Text, View, Button} from "react-native";
-
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const ArrowUp = (props) => {
 
@@ -31,7 +30,7 @@ const ArrowUp = (props) => {
     
         <View>
             <Animated.View style={{opacity:fadeAnim}}>
-                <Ionicons style={styles.icon} name="arrow-up" size={40} color="white" />
+                <MaterialCommunityIcons style={styles.icon} name="chevron-double-up" size={40} color="white" />
             </Animated.View>
         </View>
 

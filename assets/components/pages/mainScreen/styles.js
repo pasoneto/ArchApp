@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
       },
       CTAbutton: {
         margin: "10%",
-        // backgroundColor: 'red',
-        // color: 'red',
+        backgroundColor: 'red',
+        color: 'red',
       }
 });
 

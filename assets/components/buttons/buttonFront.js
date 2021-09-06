@@ -11,9 +11,7 @@ const ButtonStyled = (props) => {
     const bgcolor = type == 'primary' ? '#171A20CC' : '#FFFFFFA6';
     const textcol = type == 'primary' ? '#FFFFFF' : '#171A20CC' 
 
-
     return(
-        // <View style={styles.container}>
             <Pressable 
                 style={[styles.button, {backgroundColor: bgcolor}]}
                 onPress={() => navigation.navigate(whereto)}
@@ -21,7 +19,6 @@ const ButtonStyled = (props) => {
                 <Text style={[styles.text, {color: textcol}]}>{content}</Text>
 
             </Pressable>
-        // </View>
     );
 }
 
