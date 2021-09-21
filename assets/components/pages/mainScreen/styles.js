@@ -80,6 +80,11 @@ const styles = StyleSheet.create({
         margin: "10%",
         backgroundColor: 'red',
         color: 'red',
+      },
+      wrap: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        marginBottom: 36
       }
 });
 

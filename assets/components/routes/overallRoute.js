@@ -15,8 +15,8 @@ const OverallRoute = (props) =>{
     <NavigationContainer>
        <Stack.Navigator>
          <Stack.Screen name="Home" component={ArtistList}  options={{ headerShown: false }} />
-         <Stack.Screen name="Login" component={LogIn} options={{headerShown: false}} />
-         <Stack.Screen name="Register" component={registerPage} options={{headerShown: false}} />
+         <Stack.Screen name="Login" component={LogIn} options={{headerShown: true}} />
+         <Stack.Screen name="Register" component={registerPage} options={{headerShown: true}} />
          <Stack.Screen name="Welcome" component={WelcomePage} options={{headerShown: false}}/>
          <Stack.Screen name="Partituras" component={PartituraList} />
        </Stack.Navigator>

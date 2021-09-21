@@ -23,10 +23,11 @@ const FrontPage = (props) => {
           {props.artist.first == 'true' && <Text style={styles.subtitle}>{CTA}</Text>}
         </View>
 
-      {props.artist.first == 'true' && <ArrowUp/>}
+      <View style={styles.wrap}>
+      <ArrowUp/>
       {props.artist.first == 'true' && <ButtonStyled type= "primary" content={'Entrar'} whereto={'Login'}/>}
       {props.artist.first == 'true' && <ButtonStyled type= "secondary" content={'Registrar'} whereto={'Register'} />}
-
+      </View>
       </View>
     );
 }

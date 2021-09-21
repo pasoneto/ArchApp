@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         opacity: 0.95,
         justifyContent: 'center',
         alignItems: 'center',
-        top: '47%',
         height: 40,
         borderRadius: 20,
         marginLeft: 5,
