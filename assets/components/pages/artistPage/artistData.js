@@ -25,12 +25,10 @@ export const ArtistData = () => {
     }, [username]);
 
     const readData = async function () {
-
         const parseQuery = new Parse.Query('UserData');
         try {
           let todos = await parseQuery.find();
           setReadResults(todos);
-          console.log(todos)
           return true;
         } catch (error) {
           Alert.alert('Error!', error.message);
@@ -48,9 +46,23 @@ export const ArtistData = () => {
         const siteValue = site;
         const usernameValue = username;
 
+        // Verificando se usuario já tem dados
+        let userQuery = new Parse.Query('UserData');
+        userQuery.equalTo('username', usernameValue);
+        let userQueryResult = await userQuery.first();
+        // if (userQueryResult !== null && userQueryResult !== undefined) {
+        //   Alert.alert(
+        //     'Erro!',
+        //     'Cadastro já foi feito',
+        //   );
+        //   return false;
+        // } else {
+        console.log(userQueryResult.id) 
         try {
             //create a new Parse Object instance
             const newPerson = new Parse.Object('UserData');
+            newPerson.set('objectId', userQueryResult.id)
+            // newPerson.set('objectId', usernameValue);
             //define the attributes you want for your Object
             newPerson.set('name', nameValue);
             newPerson.set('genero', generoValue);
@@ -64,13 +76,12 @@ export const ArtistData = () => {
                 console.log('Error saving new person: ', error);
             }
         readData();
-        }
-    
-
-
+            }
+        // }
 
   return (
     <View style={styles.artistdata}>
+
     {readResults !== null &&
      readResults !== undefined &&
       <FlatList
@@ -84,6 +95,7 @@ export const ArtistData = () => {
                  </Text>}}
         }
      />}
+
         <TextInput
             style={styles.TextInputArtist}
             placeholder="Nome"

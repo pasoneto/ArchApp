@@ -17,7 +17,10 @@ const styles = StyleSheet.create({
     },
     userData: {
         alignItems: 'center',
-        color: 'red'
+        flex: 1,
+        textAlign: 'left',
+        position: 'relative',
+        color: 'black'
     },
     subtitle: {
         fontSize: 20,
@@ -118,7 +121,8 @@ const styles = StyleSheet.create({
     savebutton: {
         backgroundColor: "green",
         width: "30%",
-        marginTop: 20
+        marginTop: 20,
+        marginBottom: 20
     },
     welcomemessage: {
         fontSize: 16,
@@ -126,8 +130,6 @@ const styles = StyleSheet.create({
         paddingBottom: 25,
         paddingTop: 15,
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
-        // textShadowOffset: {width: -1, height: 1},
-        // textShadowRadius: 1,
         justifyContent: 'center',
         textAlign: 'center'
     },
