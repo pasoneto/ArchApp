@@ -24,10 +24,16 @@ function registerPage(props) {
     Parse.serverURL = 'https://parseapi.back4app.com/';
 
     const doUserRegistration = async function (user, password, email) {
+
       // Note that these values come from state variables that we've declared before
       const usernameValue = user;
       const passwordValue = password;
       const emailValue = email;
+
+      const newPerson = new Parse.Object('UserData');
+      newPerson.set('username', usernameValue);
+      await newPerson.save();
+
       // Since the signUp method returns a Promise, we need to call it using await
       // Note that now you are setting the user email value as well
       return await Parse.User.signUp(usernameValue, passwordValue, {

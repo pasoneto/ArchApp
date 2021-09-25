@@ -17,7 +17,8 @@ export const ArtistData = () => {
             if (username === '') {
                 const currentUser = await Parse.User.currentAsync();
                 if (currentUser !== null) {
-                setUsername(currentUser.getUsername());
+                    setUsername(currentUser.getUsername());
+                    readData();
                 }
             }
             }
@@ -35,34 +36,25 @@ export const ArtistData = () => {
           return false;
         }
       };
-
-// Funcionando. Agora preciso evitar que o mesmo sujeito guarde dois dados sobre ele mesmo.
-
-    const doUserData = async function addPerson(name, genero, spotify, site, username) {
+    
+    var o = readResults.find(i => i.get('username') === 'paso')
+    console.log(o)
+    
+    // Funcionando. Agora preciso evitar que o mesmo sujeito guarde dois dados sobre ele mesmo.
+    const doUserData = async function addPerson(name, genero, spotify, site, username, id) {
 
         const nameValue = name;
         const generoValue = genero;
         const spotifyValue = spotify;
         const siteValue = site;
         const usernameValue = username;
+        const idValue = id
 
         // Verificando se usuario já tem dados
-        let userQuery = new Parse.Query('UserData');
-        userQuery.equalTo('username', usernameValue);
-        let userQueryResult = await userQuery.first();
-        // if (userQueryResult !== null && userQueryResult !== undefined) {
-        //   Alert.alert(
-        //     'Erro!',
-        //     'Cadastro já foi feito',
-        //   );
-        //   return false;
-        // } else {
-        console.log(userQueryResult.id) 
         try {
             //create a new Parse Object instance
             const newPerson = new Parse.Object('UserData');
-            newPerson.set('objectId', userQueryResult.id)
-            // newPerson.set('objectId', usernameValue);
+            newPerson.set('objectId', idValue);
             //define the attributes you want for your Object
             newPerson.set('name', nameValue);
             newPerson.set('genero', generoValue);
@@ -126,10 +118,9 @@ export const ArtistData = () => {
 
         <TouchableOpacity 
             style={styles.savebutton}
-            onPress={() => doUserData(name, genero, spotify, site, username)}>
+            onPress={() => doUserData(name, genero, spotify, site, username, o.id)}>
             <Text style={styles.subtitle}>Salvar</Text>
         </TouchableOpacity>
-
 
     </View>
   );
