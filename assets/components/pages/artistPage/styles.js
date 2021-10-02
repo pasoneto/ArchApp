@@ -17,17 +17,40 @@ const styles = StyleSheet.create({
     },
     userData: {
         alignItems: 'center',
-        flex: 1,
+        width: Dimensions.get('screen').width*0.65,
+        backgroundColor: "lightgray",
+        borderColor: "black",
+        borderWidth: 1,
+        borderRadius: 5,
         textAlign: 'left',
-        position: 'relative',
         color: 'black'
+    },
+    userData2: {
+        alignItems: 'center',
+        width: Dimensions.get('screen').width*0.23,
+        backgroundColor: "darkgray",
+        borderColor: "black",
+        borderWidth: 1,
+        borderRadius: 5,
+        textAlign: 'left',
+        color: 'black'
+    },
+    info_wrapper: {
+       flex: 1, 
+       flexDirection: 'row',
     },
     subtitle: {
         fontSize: 20,
         color: 'white',
+        textAlign: 'center',
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
         textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 2,
+    },
+    save_text: {
+        fontSize: 20,
+        color: 'white',
+        textAlign: 'center',
     },
     hellomessage: {
         fontSize: 15,
@@ -119,10 +142,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     savebutton: {
-        backgroundColor: "green",
-        width: "30%",
-        marginTop: 20,
-        marginBottom: 20
+        backgroundColor: "blue",
+        borderRadius: 5,
+        marginTop: 5,
+        marginLeft: 5,
+        marginBottom: 5 
     },
     welcomemessage: {
         fontSize: 16,
@@ -146,6 +170,16 @@ const styles = StyleSheet.create({
         height: 45,
         elevation: 3
       }, 
+    button_wrap2: {
+        flexDirection: 'row',
+        marginTop: 0,
+        marginBottom: 10,
+        shadowColor: 'black',
+        shadowOffset: {width: -1, height: 1},
+        shadowRadius: 10,
+        width: Dimensions.get("screen").width*0.5,
+        elevation: 3
+   },
 });
 
 export default styles

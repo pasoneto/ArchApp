@@ -64,9 +64,6 @@ export const WelcomePage = (props) => {
 
 {!valor &&
         <View style={styles.render}>
-          <Text style={styles.welcomemessage}> 
-            Adicione suas informaçoes pessoais.
-          </Text>
           <ArtistData style={styles.artistdata}/>
         </View>
 }

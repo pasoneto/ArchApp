@@ -10,6 +10,7 @@ function registerPage(props) {
     const image = require('../../../images/loginBG.jpg') 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
+    const [password2, setPassword2] = useState('');
     const [email, setEmail] = useState('');
     const navigation = useNavigation();
 
@@ -23,16 +24,30 @@ function registerPage(props) {
     //Point to Back4App Parse API address 
     Parse.serverURL = 'https://parseapi.back4app.com/';
 
-    const doUserRegistration = async function (user, password, email) {
+    const doUserRegistration = async function (user, password, password2, email) {
 
       // Note that these values come from state variables that we've declared before
       const usernameValue = user;
       const passwordValue = password;
+      const passwordValue2 = password2;
       const emailValue = email;
 
+      if(passwordValue !== '' && passwordValue2 !== ''){
+        if(passwordValue !== passwordValue2){
+          Alert.alert("As senhas não são iguais")
+        }
+      }
+
+      // Creating data base for storage of information about artist
       const newPerson = new Parse.Object('UserData');
       newPerson.set('username', usernameValue);
       await newPerson.save();
+
+      // Creating data base for storage of artist's music scores 
+      const partPerson = new Parse.Object('UserScores');
+      partPerson.set('username', usernameValue);
+      partPerson.set('scores', '');
+      await partPerson.save();
 
       // Since the signUp method returns a Promise, we need to call it using await
       // Note that now you are setting the user email value as well
@@ -62,7 +77,6 @@ function registerPage(props) {
           return false;
         });
     };
-
 
     return (
 
@@ -95,6 +109,15 @@ function registerPage(props) {
 
         <TextInput
             style={styles.TextInput}
+            placeholder="Repita a senha"
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            autoCapitalize={"none"}
+            onChangeText={(password2) => setPassword2(password2)}
+        />
+
+        <TextInput
+            style={styles.TextInput}
             placeholder="E-mail"
             placeholderTextColor="#003f5c"
             autoCapitalize={"none"}
@@ -103,7 +126,7 @@ function registerPage(props) {
         
       <TouchableOpacity 
         style={styles.loginBtn}
-        onPress={() => doUserRegistration(user, password, email)}>
+        onPress={() => doUserRegistration(user, password, password2, email)}>
             <Text style={styles.logintext}>Registrar</Text>
       </TouchableOpacity>
       
