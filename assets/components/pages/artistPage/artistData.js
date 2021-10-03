@@ -114,6 +114,10 @@ export const ArtistData = () => {
      />}
 
    {update == true &&
+    <Text>Adicione suas informações abaixo:</Text>
+   }
+
+   {update == true &&
         <TextInput
             style={styles.TextInputArtist}
             placeholder="Nome"

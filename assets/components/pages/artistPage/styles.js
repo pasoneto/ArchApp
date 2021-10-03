@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     },
     info_wrapper: {
        flex: 1, 
+       marginTop: 25,
        flexDirection: 'row',
     },
     subtitle: {
@@ -74,7 +75,6 @@ const styles = StyleSheet.create({
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: "blue",
       },
     TextInput: {
         color: 'black',
@@ -115,14 +115,14 @@ const styles = StyleSheet.create({
         width: '104.5%',
         alignSelf: 'center',
         justifyContent: 'center',
-        borderBottomColor: 'red',
    },
     buttoncontainer: {
         flex: 0.28,
-    },
+    }, 
     render: {
         flex: 2,
-        backgroundColor: "lightblue",
+        backgroundColor:'#00ced1',
+        opacity: .9,
         width: "96%",
         alignSelf: "center",
         borderColor:'black',
@@ -144,9 +144,9 @@ const styles = StyleSheet.create({
     savebutton: {
         backgroundColor: "blue",
         borderRadius: 5,
-        marginTop: 5,
+        marginTop: 20,
         marginLeft: 5,
-        marginBottom: 5 
+        marginBottom: 10, 
     },
     welcomemessage: {
         fontSize: 16,
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     },
     TextInputArtist: {
         color: 'black',
-        backgroundColor: 'white',
+        backgroundColor: '#f8f8ff',
         borderRadius: 10,
         margin: 5,
         textAlign: 'center',
