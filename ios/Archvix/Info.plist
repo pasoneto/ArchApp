@@ -52,4 +52,8 @@
   <key>UIStatusBarStyle</key>
   <string>UIStatusBarStyleDefault</string>
 </dict>
+<dict>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>ArchVix would like access to your photo</string> 
+</dict>
 </plist>

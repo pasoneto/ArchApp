@@ -1,6 +1,7 @@
 import React, {FC, useEffect, ReactElement, useState} from 'react';
 import Parse from 'parse/react-native';
 import { TextInput, FlatList, Alert, Text, TouchableOpacity, View} from 'react-native';
+import ImageChoose from './picUpload';
 import styles from './styles';
 
 export const ArtistData = () => {
@@ -152,6 +153,11 @@ export const ArtistData = () => {
             onChangeText={(site) => setSite(site)}
         />
     }
+    {update == true &&
+    <ImageChoose style={styles.TextInputArtist}>
+    </ImageChoose>
+    }
+
 
     <TouchableOpacity 
         style={styles.savebutton}

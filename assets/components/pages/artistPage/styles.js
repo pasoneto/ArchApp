@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     info_wrapper: {
        flex: 1, 
-       marginTop: 25,
+       marginTop: 2,
        flexDirection: 'row',
     },
     subtitle: {
@@ -158,6 +158,24 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     TextInputArtist: {
+        color: 'red',
+        backgroundColor: '#f8f8ff',
+        borderRadius: 10,
+        margin: 5,
+        textAlign: 'center',
+        shadowColor: 'black',
+        shadowOffset: {width: -1, height: 1},
+        shadowRadius: 10,
+        width: Dimensions.get("screen").width*0.8,
+        height: 45,
+        elevation: 3
+      }, 
+    TextImage: {
+        color: 'red',
+        textAlign: 'center',
+        margin: 5 
+    },
+    PicUploadArea: {
         color: 'black',
         backgroundColor: '#f8f8ff',
         borderRadius: 10,

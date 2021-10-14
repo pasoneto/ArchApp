@@ -40,13 +40,16 @@ export const ArtistPartitura = () => {
             onChangeText={(site) => setSite(site)}
         />
 
+
         <TouchableOpacity 
             style={styles.savebutton}
             onPress={() => console.warn("Salvar dados")}>
             <Text style={styles.subtitle}>Salvar</Text>
         </TouchableOpacity>
 
-    </View>
+
+
+  </View>
   );
 };
 export default ArtistPartitura;
