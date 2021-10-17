@@ -40,7 +40,7 @@ export const ImageChoose = () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [16, 9],
       quality: 1,
     });
 
@@ -53,11 +53,11 @@ export const ImageChoose = () => {
 
   return (
     <View>
-	<TouchableOpacity 
-		style={styles.TextInputArtist}
-		onPress={pickImage}>
-		<Text style={styles.TextImage}>Escolher foto</Text>
-	</TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.TextInputArtist}
+        onPress={pickImage}>
+        <Text style={styles.TextImage}>Escolher foto</Text>
+      </TouchableOpacity>
 	{/* If i want to display image somewhere, below is how to do it */}
      {/* {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />} */}
     </View>

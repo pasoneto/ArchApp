@@ -1,7 +1,7 @@
 import React, {FC, useEffect, ReactElement, useState} from 'react';
 import Parse from 'parse/react-native';
 import { TextInput, FlatList, Alert, Text, TouchableOpacity, View} from 'react-native';
-import ImageChoose from './picUpload';
+import * as ImagePicker from 'expo-image-picker';
 import styles from './styles';
 
 export const ArtistData = () => {
@@ -47,8 +47,36 @@ export const ArtistData = () => {
         setUpdate(update !== true)
     };
 
-    // Funcionando. Agora preciso evitar que o mesmo sujeito guarde dois dados sobre ele mesmo.
-    const doUserData = async function addPerson(name, genero, spotify, site, username, id) {
+    useEffect(() => {
+      (async () => {
+        if (Platform.OS !== 'web') {
+          const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+          if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!');
+          }
+        }
+      })();
+    }, []);
+
+    const [image, setImage] = useState(null);
+    const [base64, setBase64] = useState(null);
+    const pickImage = async function () {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        base64: true,
+        maxHeight:  200,
+        maxWidth:  200,
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        // setImage(result.uri);
+        setBase64(result.base64);
+        console.log(base64)
+      }
+    };
+
+    const doUserData = async function addPerson(name, genero, spotify, site, username, id, base64) {
 
         const nameValue = name;
         const generoValue = genero;
@@ -56,6 +84,8 @@ export const ArtistData = () => {
         const siteValue = site;
         const usernameValue = username;
         const idValue = id
+
+        const parseFile = new Parse.File("nome", {base64});
 
         if(nameValue && generoValue && spotifyValue && siteValue && usernameValue !== ''){
             // Verificando se usuario já tem dados
@@ -69,6 +99,8 @@ export const ArtistData = () => {
                 newPerson.set('spotify', spotifyValue);
                 newPerson.set('site', siteValue);
                 newPerson.set('username', usernameValue);
+                newPerson.set('picture', parseFile);
+                
                 //save it on Back4App Data Store
                 await newPerson.save();
                 Alert.alert("Dados salvos :D")
@@ -80,6 +112,7 @@ export const ArtistData = () => {
         Alert.alert("Por favor, preencha todos os dados")
     };
     }
+
   return (
 
     <View style={styles.artistdata}>
@@ -92,6 +125,7 @@ export const ArtistData = () => {
 
     {readResults !== null &&
      readResults !== undefined &&
+     update == false &&
       <FlatList
         data={readResults}
         renderItem={({item}) => { if (item.get('username') == username) 
@@ -153,17 +187,21 @@ export const ArtistData = () => {
             onChangeText={(site) => setSite(site)}
         />
     }
+
     {update == true &&
-    <ImageChoose style={styles.TextInputArtist}>
-    </ImageChoose>
+        <TouchableOpacity style={styles.TextInputArtist}
+            onPress={pickImage}>
+            <Text style={styles.TextImage}>Escolha uma imagem</Text>
+        </TouchableOpacity>
     }
 
-
+    {update == true &&
     <TouchableOpacity 
         style={styles.savebutton}
-        onPress={() => doUserData(name, genero, spotify, site, username, o.id)}>
+        onPress={() => {doUserData(name, genero, spotify, site, username, o.id, base64)} }>
         <Text style={styles.save_text}>Salvar</Text>
     </TouchableOpacity>
+    }
     </View>
 
 );

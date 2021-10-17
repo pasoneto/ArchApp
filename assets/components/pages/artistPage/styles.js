@@ -171,9 +171,9 @@ const styles = StyleSheet.create({
         elevation: 3
       }, 
     TextImage: {
-        color: 'red',
+        color: 'blue',
         textAlign: 'center',
-        margin: 5 
+        margin: 10, 
     },
     PicUploadArea: {
         color: 'black',
