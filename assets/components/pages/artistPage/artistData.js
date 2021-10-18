@@ -1,6 +1,6 @@
 import React, {FC, useEffect, ReactElement, useState} from 'react';
 import Parse from 'parse/react-native';
-import { TextInput, FlatList, Alert, Text, TouchableOpacity, View} from 'react-native';
+import { TextInput, FlatList, Image, Alert, Text, TouchableOpacity, View} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styles from './styles';
 
@@ -14,6 +14,8 @@ export const ArtistData = () => {
     const [username, setUsername] = useState('');
     const [update, setUpdate] = useState(false);
 
+
+    //Getting username
     useEffect(() => {
             async function getCurrentUser() {
             if (username === '') {
@@ -27,6 +29,7 @@ export const ArtistData = () => {
             getCurrentUser();
     }, [username]);
 
+    //Reading ALL data from the user database
     const readData = async function () {
         const parseQuery = new Parse.Query('UserData');
         try {
@@ -38,15 +41,19 @@ export const ArtistData = () => {
           return false;
         }
       };
-
+    
+    //Fetching only results that correspond to current user's username
     if(readResults !== []){
         var o = readResults.find(i => i.get('username') === 'paso')
     }
-
+    //Function to set state. Facilitates transitions between components
     const atualizar = function(){
         setUpdate(update !== true)
     };
 
+    console.log(readResults)
+
+    //Asks permission for accessing mobile file storage
     useEffect(() => {
       (async () => {
         if (Platform.OS !== 'web') {
@@ -58,7 +65,7 @@ export const ArtistData = () => {
       })();
     }, []);
 
-    const [image, setImage] = useState(null);
+    //Picks image
     const [base64, setBase64] = useState(null);
     const pickImage = async function () {
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -70,12 +77,11 @@ export const ArtistData = () => {
         quality: 1,
       });
       if (!result.cancelled) {
-        // setImage(result.uri);
         setBase64(result.base64);
-        console.log(base64)
       }
     };
 
+    //Saves data to current user
     const doUserData = async function addPerson(name, genero, spotify, site, username, id, base64) {
 
         const nameValue = name;
@@ -85,6 +91,7 @@ export const ArtistData = () => {
         const usernameValue = username;
         const idValue = id
 
+        //Encodes chosen picture
         const parseFile = new Parse.File("nome", {base64});
 
         if(nameValue && generoValue && spotifyValue && siteValue && usernameValue !== ''){
@@ -117,8 +124,9 @@ export const ArtistData = () => {
 
     <View style={styles.artistdata}>
 
+    <View style={{flex: 0.7, alignItems: "center"}}>
     <TouchableOpacity 
-        style={styles.savebutton}
+        style={styles.updatebutton}
         onPress={() => atualizar()}>
         <Text style={styles.save_text}>Atualizar dados</Text>
     </TouchableOpacity>
@@ -126,6 +134,7 @@ export const ArtistData = () => {
     {readResults !== null &&
      readResults !== undefined &&
      update == false &&
+     <View style={styles.dadosWrap}>
       <FlatList
         data={readResults}
         renderItem={({item}) => { if (item.get('username') == username) 
@@ -143,10 +152,36 @@ export const ArtistData = () => {
                  <Text style={styles.userData}> {item.get('spotify')}</Text>
                  <Text style={styles.userData}> {item.get('site')}</Text>
                 </View>
+
+	
                 </View>
                  }}
         }
-     />}
+     />
+     </View>
+     }
+    </View>
+    
+    <View style={{flex: 1}}>
+    {readResults !== null &&
+     readResults !== undefined &&
+     update == false &&
+     <View style={styles.dadosWrap}>
+      <FlatList
+        data={readResults}
+        ListEmptyComponent={<Text>Carregando imagem...</Text>}
+        renderItem={({item}) => { if (item.get('username') == username && item.get('picture') !== undefined)
+	       {return  <Image 
+              style={styles.ProfilePic}
+              source={ {uri: item.get('picture').url()} } />
+         }
+      }}
+      />
+    </View>
+    }
+    </View>
+
+  <View style={{alignItems: "center"}}>
 
    {update == true &&
     <Text>Adicione suas informações abaixo:</Text>
@@ -204,6 +239,7 @@ export const ArtistData = () => {
     }
     </View>
 
+  </View>
 );
 }
 export default ArtistData;

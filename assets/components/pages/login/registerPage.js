@@ -26,7 +26,6 @@ function registerPage(props) {
 
     const doUserRegistration = async function (user, password, password2, email) {
 
-      // Note that these values come from state variables that we've declared before
       const usernameValue = user;
       const passwordValue = password;
       const passwordValue2 = password2;

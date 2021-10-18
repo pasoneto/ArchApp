@@ -122,7 +122,6 @@ const styles = StyleSheet.create({
     render: {
         flex: 2,
         backgroundColor:'#00ced1',
-        opacity: .9,
         width: "96%",
         alignSelf: "center",
         borderColor:'black',
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 5,
     },
     artistdata: {
-        flex: 2,
+        flex: 1,
         alignSelf: "center",
         alignItems: "center",
     },
@@ -142,6 +141,13 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     savebutton: {
+        backgroundColor: "blue",
+        borderRadius: 5,
+        marginTop: 20,
+        marginLeft: 5,
+        marginBottom: 10, 
+    },
+    updatebutton: {
         backgroundColor: "blue",
         borderRadius: 5,
         marginTop: 20,
@@ -170,6 +176,12 @@ const styles = StyleSheet.create({
         height: 45,
         elevation: 3
       }, 
+    ProfilePic: {
+        width: 200,
+        height: 200,
+        resizeMode: 'cover',
+        alignSelf: "center",
+    },
     TextImage: {
         color: 'blue',
         textAlign: 'center',
@@ -198,6 +210,10 @@ const styles = StyleSheet.create({
         width: Dimensions.get("screen").width*0.5,
         elevation: 3
    },
+   dadosWrap: {
+       flex: 1,
+       alignItems: "center"
+   }
 });
 
 export default styles
