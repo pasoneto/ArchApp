@@ -11,6 +11,7 @@ const ArtistList = (props) => {
             <FlatList
                 data={lista_info}
                 renderItem={({item}) => <FrontPage artist={item} />}
+                keyExtractor={(item, index) => index.toString()}
                 snapToAlignment={'start'}
                 decelerationRate={'fast'}
                 snapToInterval={Dimensions.get('screen').height}

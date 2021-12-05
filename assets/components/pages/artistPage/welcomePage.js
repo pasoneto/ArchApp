@@ -1,4 +1,4 @@
-import React, {FC, useState, ReactElement} from 'react';
+import React, {FC, useState, useEffect, ReactElement} from 'react';
 import {Alert, Text, ImageBackground, TextInput, TouchableOpacity, View} from 'react-native';
 import Parse from 'parse/react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -10,8 +10,78 @@ import ArtistData from './artistData';
 import ArtistPartitura from './artistPartiture';
 
 export const WelcomePage = (props) => {
+
   const navigation = useNavigation();
-  // console.log(props)
+
+  /////////////////////////////////////////////////////////////////
+  //////////////////////insert data gather here ///////////////////
+  /////////////////////////////////////////////////////////////////
+
+    const [readResults, setReadResults] = useState([]);
+    const [username, setUsername] = useState('');
+
+    //Getting username
+    useEffect(() => {
+            async function getCurrentUser() {
+            if (username === '') {
+                const currentUser = await Parse.User.currentAsync();
+                if (currentUser !== null) {
+                    setUsername(currentUser.getUsername());
+                    readData();
+                }
+            }
+            }
+            getCurrentUser();
+    }, [username]);
+
+    //Reading ALL data from the user database
+    const readData = async function () {
+        const parseQuery = new Parse.Query('UserData');
+        try {
+          let todos = await parseQuery.find();
+          setReadResults(todos);
+          return true;
+        } catch (error) {
+          Alert.alert('Error!', error.message);
+          return false;
+        }
+      };
+    
+
+    console.log(readResults)
+
+    //Asks permission for accessing mobile file storage
+    useEffect(() => {
+      (async () => {
+        if (Platform.OS !== 'web') {
+          const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+          if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!');
+          }
+        }
+      })();
+    }, []);
+
+    //Picks image
+    const [base64, setBase64] = useState(null);
+    const pickImage = async function () {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        base64: true,
+        maxHeight:  200,
+        maxWidth:  200,
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        setBase64(result.base64);
+      }
+    };
+
+  /////////////////////////////////////////////////////////////////
+  //////////////////////insert data gather here ///////////////////
+  /////////////////////////////////////////////////////////////////
+
 
   const image = require('../../../images/loginBG.jpg') 
   const doUserLogOut = async function () {
@@ -64,7 +134,7 @@ export const WelcomePage = (props) => {
 
 {!valor &&
         <View style={styles.render}>
-          <ArtistData style={styles.artistdata}/>
+          <ArtistData dadosUsuario={readResults} usernameUsuario={username} style={styles.artistdata}/>
         </View>
 }
 

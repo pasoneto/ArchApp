@@ -8,6 +8,7 @@ export const ArtistPartitura = () => {
     const [name, setName] = useState('');
     const [genero, setGenero] = useState('');
     const [spotify, setSpotify] = useState('');
+    const [site, setSite] = useState('');
 
   return (
       <View style={styles.artistdata}>

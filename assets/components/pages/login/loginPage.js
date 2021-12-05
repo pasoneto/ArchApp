@@ -29,8 +29,8 @@ const LogIn = (props) => {
        .then(async (loggedInUser) => {
          // logIn returns the corresponding ParseUser object
          Alert.alert(
-           'Success!',
-           `User ${loggedInUser.get('username')} has successfully signed in!`,
+           'Bem-vindo,',
+           `${loggedInUser.get('username')}!`,
          );
          // To verify that this is in fact the current user, currentAsync can be used
          const currentUser = await Parse.User.currentAsync();

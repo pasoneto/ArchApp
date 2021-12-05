@@ -18,4 +18,6 @@ target 'Archvix' do
   #     flipper_post_install(installer)
   #   end
   # end
+  pod 'RNPDF', :path => '../node_modules/react-native-view-pdf'
+
 end

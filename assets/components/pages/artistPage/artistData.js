@@ -1,57 +1,35 @@
 import React, {FC, useEffect, ReactElement, useState} from 'react';
 import Parse from 'parse/react-native';
-import { TextInput, FlatList, Image, Alert, Text, TouchableOpacity, View} from 'react-native';
+import { TextInput, Modal, FlatList, Image, Alert, Text, TouchableOpacity, View} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import styles from './styles';
 
-export const ArtistData = () => {
+export const ArtistData = (props) => {
 
     const [name, setName] = useState('');
     const [genero, setGenero] = useState('');
     const [spotify, setSpotify] = useState('');
     const [site, setSite] = useState('');
-    const [readResults, setReadResults] = useState([]);
-    const [username, setUsername] = useState('');
     const [update, setUpdate] = useState(false);
+    const username = props.usernameUsuario
+    const readResults = props.dadosUsuario
 
+  /////////////////////////////////////
+  // TRANSFER THIS TO welcomePage.js //
+  /////////////////////////////////////
+  ////////////////////////////////////////////
+  // END OF TRANSFER THIS TO welcomePage.js //
+  ////////////////////////////////////////////
 
-    //Getting username
-    useEffect(() => {
-            async function getCurrentUser() {
-            if (username === '') {
-                const currentUser = await Parse.User.currentAsync();
-                if (currentUser !== null) {
-                    setUsername(currentUser.getUsername());
-                    readData();
-                }
-            }
-            }
-            getCurrentUser();
-    }, [username]);
-
-    //Reading ALL data from the user database
-    const readData = async function () {
-        const parseQuery = new Parse.Query('UserData');
-        try {
-          let todos = await parseQuery.find();
-          setReadResults(todos);
-          return true;
-        } catch (error) {
-          Alert.alert('Error!', error.message);
-          return false;
-        }
-      };
-    
     //Fetching only results that correspond to current user's username
     if(readResults !== []){
-        var o = readResults.find(i => i.get('username') === 'paso')
+        var o = readResults.find(i => i.get('username') === username)
     }
+
     //Function to set state. Facilitates transitions between components
     const atualizar = function(){
         setUpdate(update !== true)
     };
-
-    console.log(readResults)
 
     //Asks permission for accessing mobile file storage
     useEffect(() => {
@@ -107,10 +85,12 @@ export const ArtistData = () => {
                 newPerson.set('site', siteValue);
                 newPerson.set('username', usernameValue);
                 newPerson.set('picture', parseFile);
-                
+
+                Alert.alert("Salvando os dados...")
                 //save it on Back4App Data Store
                 await newPerson.save();
                 Alert.alert("Dados salvos :D")
+                atualizar();
                 } catch (error) {
                     console.log('Error saving new person: ', error);
                 }
@@ -170,11 +150,16 @@ export const ArtistData = () => {
       <FlatList
         data={readResults}
         ListEmptyComponent={<Text>Carregando imagem...</Text>}
-        renderItem={({item}) => { if (item.get('username') == username && item.get('picture') !== undefined)
-	       {return  <Image 
-              style={styles.ProfilePic}
-              source={ {uri: item.get('picture').url()} } />
-         }
+        renderItem={({item}) => { if (item.get('username') == username)
+	       {if (item.get('picture') !== undefined) {
+          return  <Image 
+            style={styles.ProfilePic}
+            source={ {uri: item.get('picture').url()} } />}
+          else {
+          return <Image 
+            style={styles.ProfilePic}
+            source={require("/Users/pdealcan/Documents/github/Archvix/assets/images/user_image_placeholder.png")} />
+         }}
       }}
       />
     </View>

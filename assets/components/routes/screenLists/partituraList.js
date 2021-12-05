@@ -13,6 +13,7 @@ const PartituraList = (props) => {
             <FlatList
                 data={artist_data}
                 renderItem={({item}) => {if ( item.name.valueOf() == name.valueOf() ) {return <Partituras artist={item}/> }} }
+                keyExtractor={(item, index) => index.toString()}
                 snapToAlignment={'start'}
                 decelerationRate={'fast'}
                 snapToInterval={Dimensions.get('screen').height}
