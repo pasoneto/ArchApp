@@ -1,10 +1,10 @@
 import React, {FC, useState, useEffect, ReactElement} from 'react';
 import {Alert, Text, ImageBackground, TextInput, TouchableOpacity, View} from 'react-native';
 import Parse from 'parse/react-native';
+import * as ImagePicker from 'expo-image-picker';
 import {useNavigation} from '@react-navigation/native';
 import {StackActions} from '@react-navigation/native';
 import styles from './styles';
-import UserName from './userName';
 import ButtonData from '../../buttons/buttonData';
 import ArtistData from './artistData';
 import ArtistPartitura from './artistPartiture';
@@ -48,7 +48,7 @@ export const WelcomePage = (props) => {
       };
     
 
-    console.log(readResults)
+   // console.log(readResults)
 
     //Asks permission for accessing mobile file storage
     useEffect(() => {
@@ -104,8 +104,8 @@ export const WelcomePage = (props) => {
   };
 
   const [valor, setValor] = useState(true); 
-  const [color1, setColor1] = useState("blue");
-  const [color2, setColor2] = useState("lightblue");
+  const [color1, setColor1] = useState("#eaece5");
+  const [color2, setColor2] = useState("#b2c2bf");
 
   return (
     <View style={styles.container}>
@@ -122,12 +122,12 @@ export const WelcomePage = (props) => {
             <ButtonData 
               text={"Partituras"} 
               color={color1} 
-              onPress={() => {setValor(true); setColor1("blue"); setColor2("lightblue")} }
+              onPress={() => {setValor(true); setColor1("#b2c2bf"); setColor2("#eaece5") } }
             />
             <ButtonData 
               text={"Dados"}
               color={color2}
-              onPress={() => {setValor(false); setColor1("lightblue"); setColor2("blue")}}
+              onPress={() => {setValor(false); setColor1("#eaece5"); setColor2("#b2c2bf") }}
             />
           </View>
         </View>
@@ -140,17 +140,16 @@ export const WelcomePage = (props) => {
 
 {valor &&
         <View style={styles.render}>
-          <Text style={styles.welcomemessage}> 
-            Adicione a partitura e informações sobre a música. 
-          </Text>
           <ArtistPartitura/>
         </View>
 }
+
           <TouchableOpacity style={styles.logoutBtn} onPress={() => doUserLogOut()}>
             <View >
               <Text style={styles.logintext} >{'Logout'}</Text>
             </View>
           </TouchableOpacity>
+
     </View>
   );
 };

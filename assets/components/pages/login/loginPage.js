@@ -76,7 +76,7 @@ const LogIn = (props) => {
 
       <TouchableOpacity 
         style={styles.forgot_button}
-        onPress={() => console.warn("Esqueceu pae")}>
+        onPress={() => navigation.navigate("Reset")}>
             <Text style={styles.subtitle}>Esqueceu a senha?</Text>
       </TouchableOpacity>
  

@@ -18,26 +18,30 @@ const styles = StyleSheet.create({
     userData: {
         alignItems: 'center',
         width: Dimensions.get('screen').width*0.65,
-        backgroundColor: "lightgray",
-        borderColor: "black",
-        borderWidth: 1,
-        borderRadius: 5,
+        color: "#fff",
+        textShadowColor: "black",
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 0.5,
+        fontSize: 15,
+        fontWeight: 'bold',
         textAlign: 'left',
-        color: 'black'
     },
     userData2: {
         alignItems: 'center',
         width: Dimensions.get('screen').width*0.23,
-        backgroundColor: "darkgray",
-        borderColor: "black",
-        borderWidth: 1,
-        borderRadius: 5,
         textAlign: 'left',
-        color: 'black'
+        textShadowColor: "white",
+        textShadowRadius: 0.2,
+        fontSize: 15,
+        color: '#3b3a30'
     },
     info_wrapper: {
        flex: 1, 
        marginTop: 2,
+       backgroundColor: "#b2c2bf",
+       borderColor: "#3b3a30",
+       borderWidth: 2,
+       borderRadius: 4,
        flexDirection: 'row',
     },
     subtitle: {
@@ -50,7 +54,7 @@ const styles = StyleSheet.create({
     },
     save_text: {
         fontSize: 20,
-        color: 'white',
+        color: 'blue',
         textAlign: 'center',
     },
     hellomessage: {
@@ -77,7 +81,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
       },
     TextInput: {
-        color: 'black',
+        color: '#3b3a30',
         backgroundColor: 'white',
         borderRadius: 10,
         margin: 5,
@@ -90,10 +94,15 @@ const styles = StyleSheet.create({
         height: 45,
       }, 
     logintext: {
-        color: 'black',
+        color: '#fff',
         alignSelf: 'center',
-        fontSize: 20
+        fontSize: 20,
       },
+   escolherImagem: {
+        color: 'blue',
+        textAlign: 'center',
+        margin: 10, 
+   },
    logoutBtn: {
         borderRadius: 15,
         width: "40%",
@@ -101,8 +110,7 @@ const styles = StyleSheet.create({
         padding: 5,
         alignSelf: "center",
         justifyContent: "center",
-        backgroundColor: "lightblue",
-        // shadowOffset: {width: 10, height: 10},
+        backgroundColor: "#3b3a30",
         shadowOpacity: 0.9,
         shadowRadius: 2,
         shadowColor: 'black',
@@ -121,10 +129,10 @@ const styles = StyleSheet.create({
     }, 
     render: {
         flex: 2,
-        backgroundColor:'#00ced1',
+        backgroundColor:'#eaece5',
         width: "96%",
         alignSelf: "center",
-        borderColor:'black',
+        borderColor:'#3b3a30',
         borderLeftWidth: 5,
         borderRightWidth: 5,
         borderBottomWidth: 5,
@@ -141,22 +149,21 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     savebutton: {
-        backgroundColor: "blue",
+        backgroundColor: "#b2c2bf",
         borderRadius: 5,
-        marginTop: 20,
-        marginLeft: 5,
-        marginBottom: 10, 
+        marginTop: 10,
+        width: 100
     },
     updatebutton: {
-        backgroundColor: "blue",
+        backgroundColor: "#3b3a30",
         borderRadius: 5,
         marginTop: 20,
         marginLeft: 5,
         marginBottom: 10, 
     },
     welcomemessage: {
-        fontSize: 16,
-        color: 'black',
+        fontSize: 22,
+        color: '#3b3a30',
         paddingBottom: 25,
         paddingTop: 15,
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
@@ -164,8 +171,8 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     TextInputArtist: {
-        color: 'red',
-        backgroundColor: '#f8f8ff',
+        color: '#fff',
+        backgroundColor: '#3b3a30',
         borderRadius: 10,
         margin: 5,
         textAlign: 'center',
@@ -173,17 +180,19 @@ const styles = StyleSheet.create({
         shadowOffset: {width: -1, height: 1},
         shadowRadius: 10,
         width: Dimensions.get("screen").width*0.8,
-        height: 45,
+        height: 35,
         elevation: 3
       }, 
     ProfilePic: {
-        width: 200,
-        height: 200,
+        width: 170,
+        height: 170,
+        marginTop: 10,
+        borderRadius: 200,
         resizeMode: 'cover',
         alignSelf: "center",
     },
     TextImage: {
-        color: 'blue',
+        color: '#fff',
         textAlign: 'center',
         margin: 10, 
     },
