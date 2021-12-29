@@ -6,6 +6,12 @@ import android.net.Uri;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import org.wonday.pdf.RCTPdfView;
+import com.ReactNativeBlobUtil.ReactNativeBlobUtilPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import org.wonday.pdf.RCTPdfView;
+import com.ReactNativeBlobUtil.ReactNativeBlobUtilPackage;
 import com.rumax.reactnative.pdfviewer.PDFViewPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;

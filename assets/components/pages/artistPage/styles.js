@@ -170,11 +170,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         textAlign: 'center'
     },
+    indicator: {
+        flex: 1,
+        justifyContent: "center"
+    },
     TextInputArtist: {
         color: '#fff',
         backgroundColor: '#3b3a30',
         borderRadius: 10,
         margin: 5,
+        marginTop: 0,
         textAlign: 'center',
         shadowColor: 'black',
         shadowOffset: {width: -1, height: 1},
@@ -187,6 +192,7 @@ const styles = StyleSheet.create({
         width: 170,
         height: 170,
         marginTop: 10,
+        marginBottom: 10,
         borderRadius: 200,
         resizeMode: 'cover',
         alignSelf: "center",

@@ -1,4 +1,5 @@
 import React, {FC, useEffect, ReactElement, useState} from 'react';
+import { ActivityIndicator } from 'react-native';
 import Parse from 'parse/react-native';
 import { TextInput, Modal, SafeAreaView, FlatList, Image, Alert, Text, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
@@ -8,11 +9,11 @@ export const ArtistData = (props) => {
 
     const [name, setName] = useState('');
     const [genero, setGenero] = useState('');
-    const [spotify, setSpotify] = useState('');
     const [site, setSite] = useState('');
     const [update, setUpdate] = useState(false);
     const username = props.usernameUsuario
     const readResults = props.dadosUsuario
+    const [saving, setSaving] = useState(false); 
 
     //Fetching only results that correspond to current user's username
     if(readResults !== []){
@@ -53,36 +54,33 @@ export const ArtistData = (props) => {
     };
 
     //Saves data to current user
-    const doUserData = async function addPerson(name, genero, spotify, site, username, id, base64) {
+    const doUserData = async function addPerson(name, genero, site, username, id, base64) {
 
         const nameValue = name;
         const generoValue = genero;
-        const spotifyValue = spotify;
         const siteValue = site;
         const usernameValue = username;
         const idValue = id
 
         //Encodes chosen picture
         const parseFile = new Parse.File("nome", {base64});
-
-        if(nameValue && generoValue && spotifyValue && siteValue && usernameValue !== ''){
+        if(nameValue && generoValue && siteValue && usernameValue !== ''){
             // Verificando se usuario já tem dados
             try {
+                setSaving(true)
                 //create a new Parse Object instance
                 const newPerson = new Parse.Object('UserData');
                 newPerson.set('objectId', idValue);
                 //define the attributes you want for your Object
                 newPerson.set('name', nameValue);
                 newPerson.set('genero', generoValue);
-                newPerson.set('spotify', spotifyValue);
                 newPerson.set('site', siteValue);
                 newPerson.set('username', usernameValue);
                 newPerson.set('picture', parseFile);
-
-                Alert.alert("Salvando os dados...")
                 //save it on Back4App Data Store
                 await newPerson.save();
-                Alert.alert("Dados salvos :D")
+                setSaving(false)
+                alert.Alert("Dados salvos :D")
                 atualizar();
                 } catch (error) {
                     console.log('Error saving new person: ', error);
@@ -95,58 +93,83 @@ export const ArtistData = (props) => {
 
   return (
 
-    <View style={styles.artistdata}>
+  <View style={styles.artistdata}>
 
- <SafeAreaView style={{alignItems: "center"}}>
+  <SafeAreaView style={{alignItems: "center"}}>
 
-    {o &&
+    {saving === true &&
+      <ActivityIndicator style={styles.indicator} size="large" color ="#0000ff"/> }
+
+    {o.get('picture') && saving === false &&
       <Image 
           style={styles.ProfilePic}
           source={ {uri: o.get('picture').url()} } 
+          PlaceholderContent={<ActivityIndicator />}
       />
     }
 
-    {!o &&
+    {!o.get('picture') && saving === false &&
       <Image 
           style={styles.ProfilePic}
           source={require('../../../images/user_image_placeholder.png')}
+          PlaceholderContent={<ActivityIndicator />}
       />
     }
 
-    <TextInput
-            style={styles.TextInputArtist}
-            placeholder={"Nome: " + o.get('name')}
-            placeholderTextColor="#fff"
-            onChangeText={(name) => setName(name)}
-        />
+    {saving === false &&
+        <Text>Nome</Text>}
+
+    {saving === false &&
+        <TextInput
+                style={styles.TextInputArtist}
+                placeholder={o.get('name')}
+                placeholderTextColor="#fff"
+                onChangeText={(name) => setName(name)}
+            />}
+
+    {saving === false &&
+        <Text>Genero musical:</Text>}
+
+    {saving === false &&
         <TextInput
             style={styles.TextInputArtist}
-            placeholder={"Genero musical: " + o.get('genero')}
+            placeholder={o.get('genero')}
             placeholderTextColor="#fff"
             onChangeText={(genero) => setGenero(genero)}
-        />
+        />}
+
+    {saving === false &&
+        <Text>Site pessoal:</Text>}
+
+    {saving === false &&
         <TextInput
             style={styles.TextInputArtist}
-            placeholder={"Site pessoal: " + o.get('site')}
+            placeholder={o.get('site')}
             placeholderTextColor="#fff"
             onChangeText={(site) => setSite(site)}
-        />
+        />}
+
+    {saving === false &&
+        <Text>Foto de perfil:</Text>}
+
+    {saving === false &&
         <TouchableOpacity style={styles.TextInputArtist}
             onPress={pickImage}>
-        <Text 
-          style={styles.TextImage}>Escolha uma imagem</Text>
-        </TouchableOpacity>
+          <Text style={styles.TextImage}>Escolha uma imagem</Text>
+        </TouchableOpacity>}
 
-        <TouchableOpacity 
-            style={styles.savebutton}
-            onPress={() => console.warn("Salvar dados")}>
-            <Text style={styles.subtitle}>Salvar</Text>
-        </TouchableOpacity>
+    {saving === false &&
+            <TouchableOpacity 
+              style={styles.savebutton}
+              onPress={() => {doUserData(name, genero, site, username, o.id, base64)} }>
+              <Text style={styles.subtitle}>Salvar</Text>
+            </TouchableOpacity>}
 
-    </SafeAreaView>
-  
 
-  </View>
+        </SafeAreaView>
+      
+
+      </View>
 
 
 );
