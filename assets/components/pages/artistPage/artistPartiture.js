@@ -2,6 +2,7 @@ import React, {FC, useEffect, ReactElement, useState} from 'react';
 import Parse from 'parse/react-native';
 import { TextInput, Image, Alert, Text, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
+import SelectDropdown from 'react-native-select-dropdown'
 
 export const ArtistPartitura = () => {
 
@@ -9,10 +10,27 @@ export const ArtistPartitura = () => {
     const [genero, setGenero] = useState('');
     const [spotify, setSpotify] = useState('');
     const [site, setSite] = useState('');
-
+    const partituras = ["Penedo", "Pedra Coração"]
 
   return (
       <View style={styles.artistdata}>
+
+    <SelectDropdown
+        data={partituras}
+        onSelect={(selectedItem, index) => {
+            console.log(selectedItem, index)
+        }}
+        buttonTextAfterSelection={(selectedItem, index) => {
+            return selectedItem
+        }}
+        rowTextForSelection={(item, index) => {
+            return item
+        }}
+        defaultButtonText = "Suas partituras"
+        buttonStyle={styles.dropdownStyle}
+        buttonTextStyle={styles.TextInputArtist}
+
+    />
 
       <Text>Adicione informações sobre a partitura.</Text>
 

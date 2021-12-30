@@ -188,6 +188,14 @@ const styles = StyleSheet.create({
         height: 35,
         elevation: 3
       }, 
+    dropdownStyle: {
+        marginTop: 10,
+        marginBottom: 10, 
+        borderRadius: 10,
+        height: 35,
+        textAlign: "center",
+        backgroundColor: '#3b3a30'
+    },
     ProfilePic: {
         width: 170,
         height: 170,
