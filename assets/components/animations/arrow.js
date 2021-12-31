@@ -6,6 +6,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const ArrowUp = (props) => {
 
+    const iconName = props.iconName
+    const sizeIcon = props.sizeIcon
     const fadeAnim = useRef(new Animated.Value(0.5)).current  // Initial value for opacity: 0
 
     React.useEffect(() => {
@@ -30,7 +32,7 @@ const ArrowUp = (props) => {
     
         <View>
             <Animated.View style={{opacity:fadeAnim}}>
-                <MaterialCommunityIcons style={styles.icon} name="chevron-double-up" size={40} color="white" />
+                <MaterialCommunityIcons style={styles.icon} name={iconName} size={sizeIcon} color="white" />
             </Animated.View>
         </View>
 

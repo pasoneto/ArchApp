@@ -24,7 +24,7 @@ const FrontPage = (props) => {
         </View>
 
       <View style={styles.wrap}>
-      <ArrowUp/>
+      <ArrowUp iconName={"chevron-double-up"} sizeIcon={40}/>
       {props.artist.first == 'true' && <ButtonStyled type= "primary" content={'Entrar'} whereto={'Login'}/>}
       {props.artist.first == 'true' && <ButtonStyled type= "secondary" content={'Registrar'} whereto={'Register'} />}
       </View>

@@ -3,14 +3,80 @@ import Parse from 'parse/react-native';
 import { TextInput, Image, Alert, Text, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
 import SelectDropdown from 'react-native-select-dropdown'
+import ArrowUp from '../../animations/arrow';
 
 export const ArtistPartitura = () => {
 
     const [name, setName] = useState('');
-    const [genero, setGenero] = useState('');
+    const [composer, setComposer] = useState('');
     const [spotify, setSpotify] = useState('');
-    const [site, setSite] = useState('');
-    const partituras = ["Penedo", "Pedra Coração"]
+
+    // Beginning of read user data
+    const [username, setUsername] = useState('');
+    const [readResults, setReadResults] = useState([]);
+
+    const readData = async function () {
+        const parseQuery = new Parse.Query("UserScores");
+        try {
+          let todos = await parseQuery.find();
+          setReadResults(todos);
+          return true;
+        } catch (error) {
+          Alert.alert('Error!', error.message);
+          return false;
+        }
+
+      };
+
+    //Getting username
+    useEffect(() => {
+            async function getCurrentUser() {
+            if (username === '') {
+                const currentUser = await Parse.User.currentAsync();
+                if (currentUser !== null) {
+                    setUsername(currentUser.getUsername());
+                    readData();
+                }
+            }
+            }
+            getCurrentUser();
+    }, [username]);
+
+    if(readResults !== []){
+        var a = readResults.filter((i)=>i.get('username') === username)
+        var partituras = a.map((i)=>i.get('name'))
+    }
+
+// Save score info
+    const doUserData = async function addPerson(name, composer, spotify, username) {
+
+        const nameValue = name;
+        const composerValue = composer;
+        const spotifyValue = spotify;
+        const usernameValue = username;
+
+        if(nameValue && composerValue && spotifyValue && usernameValue !== ''){
+            // Verificando se usuario já tem dados
+            try {
+                //create a new Parse Object instance
+                const newPerson = new Parse.Object('UserScores');
+                //define the attributes you want for your Object
+                newPerson.set('name', nameValue);
+                newPerson.set('composer', composerValue);
+                newPerson.set('spotify', spotifyValue);
+                newPerson.set('username', usernameValue);
+                //save it on Back4App Data Store
+                await newPerson.save();
+                // atualizar();
+                } catch (error) {
+                    console.log('Error saving new person: ', error);
+                }
+            readData();
+            } else {
+        Alert.alert("Por favor, preencha todos os dados")
+    };
+    }
+// End of save score info
 
   return (
       <View style={styles.artistdata}>
@@ -28,8 +94,10 @@ export const ArtistPartitura = () => {
         }}
         defaultButtonText = "Suas partituras"
         buttonStyle={styles.dropdownStyle}
-        buttonTextStyle={styles.TextInputArtist}
-
+        buttonTextStyle={styles.dropText}
+        renderDropdownIcon={()=> (
+            <ArrowUp iconName={"chevron-double-down"} sizeIcon={25}/>
+        )}
     />
 
       <Text>Adicione informações sobre a partitura.</Text>
@@ -45,7 +113,7 @@ export const ArtistPartitura = () => {
             style={styles.TextInputArtist}
             placeholder="Compositor(a)"
             placeholderTextColor="#fff"
-            onChangeText={(genero) => setGenero(genero)}
+            onChangeText={(composer) => setComposer(composer)}
         />
 
         <TextInput
@@ -65,7 +133,7 @@ export const ArtistPartitura = () => {
 
         <TouchableOpacity 
             style={styles.savebutton}
-            onPress={() => console.warn("Salvar dados")}>
+            onPress={() => doUserData(name, composer, spotify, username)}>
             <Text style={styles.subtitle}>Salvar</Text>
         </TouchableOpacity>
 
