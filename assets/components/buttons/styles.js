@@ -16,6 +16,20 @@ const styles = StyleSheet.create({
         marginRight: 5,
         marginBottom: 5,
     },
+    dropdownStyle: {
+        marginTop: 10,
+        marginBottom: 10,
+        borderRadius: 5,
+        height: 25,
+        backgroundColor: '#3b3a30'
+    },
+    dropText: {
+        color: '#fff',
+        shadowColor: 'black',
+        shadowOffset: {width: -1, height: 1},
+        shadowRadius: 10,
+        elevation: 3
+      }, 
     text: {
         fontSize: 17,
         alignSelf: 'center',

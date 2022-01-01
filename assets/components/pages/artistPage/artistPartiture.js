@@ -2,10 +2,11 @@ import React, {FC, useEffect, ReactElement, useState} from 'react';
 import Parse from 'parse/react-native';
 import { TextInput, Image, Alert, Text, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
-import SelectDropdown from 'react-native-select-dropdown'
 import ArrowUp from '../../animations/arrow';
+import IconButton from '../../buttons/iconButton'
+import StyledDropdown from '../../buttons/styledDropdown'
 
-export const ArtistPartitura = () => {
+export const ArtistPartitura = (props) => {
 
     const [name, setName] = useState('');
     const [composer, setComposer] = useState('');
@@ -43,9 +44,10 @@ export const ArtistPartitura = () => {
     }, [username]);
 
     if(readResults !== []){
-        var a = readResults.filter((i)=>i.get('username') === username)
-        var partituras = a.map((i)=>i.get('name'))
+        var userPartituras = readResults.filter((i)=>i.get('username') === username)
     }
+
+    // var partituras = a.map((i)=>i.get('name'))
 
 // Save score info
     const doUserData = async function addPerson(name, composer, spotify, username) {
@@ -76,29 +78,13 @@ export const ArtistPartitura = () => {
         Alert.alert("Por favor, preencha todos os dados")
     };
     }
-// End of save score info
+
+    // const [partFocus, setPartFocus] = useState('')
 
   return (
       <View style={styles.artistdata}>
 
-    <SelectDropdown
-        data={partituras}
-        onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index)
-        }}
-        buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem
-        }}
-        rowTextForSelection={(item, index) => {
-            return item
-        }}
-        defaultButtonText = "Suas partituras"
-        buttonStyle={styles.dropdownStyle}
-        buttonTextStyle={styles.dropText}
-        renderDropdownIcon={()=> (
-            <ArrowUp iconName={"chevron-double-down"} sizeIcon={25}/>
-        )}
-    />
+      <StyledDropdown object={userPartituras}/>
 
       <Text>Adicione informações sobre a partitura.</Text>
 

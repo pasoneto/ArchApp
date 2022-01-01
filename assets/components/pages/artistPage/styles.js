@@ -188,20 +188,6 @@ const styles = StyleSheet.create({
         height: 35,
         elevation: 3
       }, 
-    dropdownStyle: {
-        marginTop: 10,
-        marginBottom: 10,
-        borderRadius: 5,
-        height: 25,
-        backgroundColor: '#3b3a30'
-    },
-    dropText: {
-        color: '#fff',
-        shadowColor: 'black',
-        shadowOffset: {width: -1, height: 1},
-        shadowRadius: 10,
-        elevation: 3
-      }, 
     ProfilePic: {
         width: 170,
         height: 170,
