@@ -5,10 +5,10 @@ import ArrowUp from '../animations/arrow';
 const IconButton = ({text, iconName, onPress}) => {
   return (
 	<View style={{flexDirection: "row"}}>
+				<Text style={{fontSize: 20}}>{text}</Text>
 				<TouchableOpacity onPress={onPress}>
-				<ArrowUp iconName={iconName} size={30}/> 
+				<ArrowUp iconName={iconName} sizeIcon={25}/> 
 				</TouchableOpacity>
-				<Text style={{marginLeft: 50}}>{text}</Text>
 			</View>
   );
 };

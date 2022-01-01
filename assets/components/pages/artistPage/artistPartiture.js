@@ -1,10 +1,11 @@
 import React, {FC, useEffect, ReactElement, useState} from 'react';
 import Parse from 'parse/react-native';
-import { TextInput, Image, Alert, Text, TouchableOpacity, View} from 'react-native';
+import { TextInput, Image, StyleSheet, FlatList, Alert, Text, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
 import ArrowUp from '../../animations/arrow';
 import IconButton from '../../buttons/iconButton'
-import StyledDropdown from '../../buttons/styledDropdown'
+import { set } from 'react-native-reanimated';
+
 
 export const ArtistPartitura = (props) => {
 
@@ -45,48 +46,95 @@ export const ArtistPartitura = (props) => {
 
     if(readResults !== []){
         var userPartituras = readResults.filter((i)=>i.get('username') === username)
+        var numparts = userPartituras.length
     }
 
-    // var partituras = a.map((i)=>i.get('name'))
+  const deleteTodo = async function (todoId) {
+    // Create a new todo parse object instance and set todo id
+    const Todo = new Parse.Object('UserScores');
+    Todo.set('objectId', todoId);
+    // .destroy should be called to delete a parse object
+    try {
+      await Todo.destroy();
+      // Refresh todos list to remove this one
+      readData();
+      return true;
+    } catch (error) {
+      // Error can be caused by lack of Internet connection
+      console.log('Error!', error.message);
+      return false;
+    };
+  };
 
-// Save score info
-    const doUserData = async function addPerson(name, composer, spotify, username) {
+    const callDelete = (todoId) =>
+        //function to make two option alert
+        Alert.alert(
+           //This is title
+          'Atenção!',
+            //This is body text
+          'Você estâ prestes a deleter esta música.',
+          [
+            {text: 'Cancelar', onPress: () => console.log('No Pressed'), style: 'cancel'},
+            {text: 'Prosseguir', onPress: () => deleteTodo(todoId)},
+          ],
+          { cancelable: false }
+          //on clicking out side, Alert will not dismiss
+        );
+
+    // Save score info
+    const doUserData = async function addPerson(name, composer, spotify, username, numparts) {
 
         const nameValue = name;
         const composerValue = composer;
         const spotifyValue = spotify;
         const usernameValue = username;
 
-        if(nameValue && composerValue && spotifyValue && usernameValue !== ''){
-            // Verificando se usuario já tem dados
-            try {
-                //create a new Parse Object instance
-                const newPerson = new Parse.Object('UserScores');
-                //define the attributes you want for your Object
-                newPerson.set('name', nameValue);
-                newPerson.set('composer', composerValue);
-                newPerson.set('spotify', spotifyValue);
-                newPerson.set('username', usernameValue);
-                //save it on Back4App Data Store
-                await newPerson.save();
-                // atualizar();
-                } catch (error) {
-                    console.log('Error saving new person: ', error);
-                }
-            readData();
-            } else {
-        Alert.alert("Por favor, preencha todos os dados")
-    };
+        if(numparts < 5){ //Limit amount of scores per musician
+            if(nameValue && composerValue && spotifyValue && usernameValue !== ''){
+                // Verificando se usuario já tem dados
+                try {
+                    //create a new Parse Object instance
+                    const newPerson = new Parse.Object('UserScores');
+                    //define the attributes you want for your Object
+                    newPerson.set('name', nameValue);
+                    newPerson.set('composer', composerValue);
+                    newPerson.set('spotify', spotifyValue);
+                    newPerson.set('username', usernameValue);
+                    //save it on Back4App Data Store
+                        await newPerson.save();
+                    // atualizar();
+                    } catch (error) {
+                        console.log('Error saving new person: ', error);
+                    }
+                readData();
+                } else {
+            Alert.alert("Por favor, preencha todos os dados")
+        };
+        } else{
+            Alert.alert("Você já tem 5 partituras registradas. Por enquanto, esse é o máximo que nossos servidores aguentam. Desculpe o transtorno :(")
+        }
     }
 
-    // const [partFocus, setPartFocus] = useState('')
 
   return (
+
       <View style={styles.artistdata}>
+      
+      <View style={styles.userPartRender}>
+      <Text>Suas partituras. Clique para atualizar ou exluir.</Text>
 
-      <StyledDropdown object={userPartituras}/>
+        <FlatList style={styles.flatContainer}
+            data={userPartituras}
+            renderItem={({item}) => 
+                <TouchableOpacity style={styles.item_scores} >
+                <IconButton iconName={'trash-can'} text={item.get('name')} onPress={()=>callDelete(item.id)}/>
+                </TouchableOpacity>}
+            keyExtractor={(item, index) => index.toString()}
+        />
+    </View>
 
-      <Text>Adicione informações sobre a partitura.</Text>
+    <View style={styles.partUpdateRender}>
+      <Text>Adicione/atualize suas partituras.</Text>
 
         <TextInput
             style={styles.TextInputArtist}
@@ -116,14 +164,12 @@ export const ArtistPartitura = (props) => {
             onChangeText={(site) => setSite(site)}
         />
 
-
         <TouchableOpacity 
             style={styles.savebutton}
-            onPress={() => doUserData(name, composer, spotify, username)}>
+            onPress={() => doUserData(name, composer, spotify, username, numparts)}>
             <Text style={styles.subtitle}>Salvar</Text>
         </TouchableOpacity>
-
-
+</View>
 
   </View>
   );

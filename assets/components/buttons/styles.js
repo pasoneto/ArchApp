@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
         marginRight: 5,
         marginBottom: 5,
     },
+    item_scores: {
+      padding: 1,
+      alignItems: "center",
+    },
     dropdownStyle: {
         marginTop: 10,
         marginBottom: 10,
