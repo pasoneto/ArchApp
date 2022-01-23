@@ -127,6 +127,17 @@ const styles = StyleSheet.create({
     buttoncontainer: {
         flex: 0.28,
     }, 
+    userPartRender:{
+        flex: 0.45,
+        alignItems: "center"
+    },
+    partUpdateRender: {
+        flex: 0.55,
+        alignItems: 'center'
+    },
+    flatContainer:{
+        marginTop: 10
+    },
     render: {
         flex: 2,
         backgroundColor:'#eaece5',

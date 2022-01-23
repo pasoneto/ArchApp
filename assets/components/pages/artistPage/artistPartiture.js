@@ -42,6 +42,7 @@ export const ArtistPartitura = (props) => {
 
     if(readResults !== []){
         var userPartituras = readResults.filter((i)=>i.get('username') === username)
+        var numparts = userPartituras.length
     }
     console.log(userPartituras.length)
     // var partituras = a.map((i)=>i.get('name'))
@@ -156,16 +157,13 @@ export const ArtistPartitura = (props) => {
             onChangeText={(site) => setSite(site)}
         />
 
-
         <TouchableOpacity 
             style={styles.savebutton}
             onPress={() => doUserData(name, composer, spotify, username, userPartituras.length)}>
             <Text style={styles.subtitle}>Salvar</Text>
         </TouchableOpacity>
+</View>
 
-
-
-  </View>
   );
 };
 export default ArtistPartitura;
