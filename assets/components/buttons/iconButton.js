@@ -1,14 +1,15 @@
 import React from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
-import ArrowUp from '../animations/arrow';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import styles from './styles';
 
-const IconButton = ({text, iconName, onPress}) => {
+const IconButton = ({text, iconName, onPress, sizeIcon }) => {
   return (
 	<View style={{flexDirection: "row"}}>
 				<TouchableOpacity onPress={onPress}>
-				<ArrowUp iconName={iconName} size={30}/> 
+                	<MaterialCommunityIcons style={styles.icon} name={iconName} size={sizeIcon} color="white" />
 				</TouchableOpacity>
-				<Text style={{marginLeft: 50}}>{text}</Text>
+				<Text style={{marginLeft: 10, fontSize: 20}}>{text}</Text>
 			</View>
   );
 };

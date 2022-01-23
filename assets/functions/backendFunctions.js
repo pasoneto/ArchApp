@@ -42,3 +42,18 @@ export const doUserLogIn = async function (user, password, navigation) {
 		});
 };
 /////////End of Function performing user auth
+
+/////////Begin read user data
+export const readData = async function (readResults, setReadResults) {
+        const parseQuery = new Parse.Query("UserScores");
+        try {
+          let todos = await parseQuery.find();
+          setReadResults(todos);
+          return true;
+        } catch (error) {
+          Alert.alert('Error!', error.message);
+          return false;
+        }
+
+};
+/////////End read user data

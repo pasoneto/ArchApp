@@ -16,15 +16,22 @@ const styles = StyleSheet.create({
         marginRight: 5,
         marginBottom: 5,
     },
-    dropdownStyle: {
-        marginTop: 10,
-        marginBottom: 10,
-        borderRadius: 5,
-        height: 25,
-        backgroundColor: '#3b3a30'
+    icon: {
+        alignSelf: 'center',
+        marginBottom: 5,
+        textShadowColor: 'rgba(0, 0, 0, 0.75)',
+        textShadowOffset: {width: -1, height: 1},
+        textShadowRadius: 2,
     },
-    dropText: {
-        color: '#fff',
+    boxPart: {
+        marginTop: 10,
+        borderRadius: 5,
+        height: 170,
+    },
+    partList: {
+        margin: 0,
+        textAlign: 'center',
+        color: 'black',
         shadowColor: 'black',
         shadowOffset: {width: -1, height: 1},
         shadowRadius: 10,
