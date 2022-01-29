@@ -15,4 +15,3 @@ const IconButton = ({text, iconName, onPress, sizeIcon }) => {
 };
 
 export default IconButton;
-

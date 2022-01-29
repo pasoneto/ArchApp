@@ -1,7 +1,7 @@
 import React, {FC, useEffect, ReactElement, useState} from 'react';
 import { ActivityIndicator } from 'react-native';
 import Parse from 'parse/react-native';
-import { TextInput, Modal, SafeAreaView, FlatList, Image, Alert, Text, TouchableOpacity, View} from 'react-native';
+import { TextInput, Modal, SafeAreaView, FlatList, Image, Alert, Text, KeyboardAvoidingView, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -97,15 +97,18 @@ export const ArtistData = (props) => {
 
   <SafeAreaView style={{alignItems: "center"}}>
 
+  <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.inputArea}>
+
     {saving === true &&
       <ActivityIndicator style={styles.indicator} size="large" color ="#0000ff"/> }
 
     {o.get('picture') && saving === false &&
-      <Image 
-          style={styles.ProfilePic}
-          source={ {uri: o.get('picture').url()} } 
-          PlaceholderContent={<ActivityIndicator />}
-      />
+    <TouchableOpacity onPress={pickImage}>
+          <Image style={styles.ProfilePic} 
+                source={ {uri: o.get('picture').url()} } 
+                PlaceholderContent={<ActivityIndicator />}
+          />
+    </TouchableOpacity>
     }
 
     {!o.get('picture') && saving === false &&
@@ -117,18 +120,12 @@ export const ArtistData = (props) => {
     }
 
     {saving === false &&
-        <Text>Nome</Text>}
-
-    {saving === false &&
         <TextInput
                 style={styles.TextInputArtist}
                 placeholder={o.get('name')}
                 placeholderTextColor="#fff"
                 onChangeText={(name) => setName(name)}
             />}
-
-    {saving === false &&
-        <Text>Genero musical:</Text>}
 
     {saving === false &&
         <TextInput
@@ -139,24 +136,13 @@ export const ArtistData = (props) => {
         />}
 
     {saving === false &&
-        <Text>Site pessoal:</Text>}
-
-    {saving === false &&
         <TextInput
             style={styles.TextInputArtist}
             placeholder={o.get('site')}
             placeholderTextColor="#fff"
             onChangeText={(site) => setSite(site)}
         />}
-
-    {saving === false &&
-        <Text>Foto de perfil:</Text>}
-
-    {saving === false &&
-        <TouchableOpacity style={styles.TextInputArtist}
-            onPress={pickImage}>
-          <Text style={styles.TextImage}>Escolha uma imagem</Text>
-        </TouchableOpacity>}
+  </KeyboardAvoidingView>
 
     {saving === false &&
             <TouchableOpacity 
