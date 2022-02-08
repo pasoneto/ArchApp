@@ -38,7 +38,9 @@ export const ArtistData = (props) => {
     }, []);
 
     //Picks image
+    const [image, setImage] = useState(null);
     const [base64, setBase64] = useState(null);
+
     const pickImage = async function () {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -50,21 +52,26 @@ export const ArtistData = (props) => {
       });
       if (!result.cancelled) {
         setBase64(result.base64);
+        setImage(result.uri);
       }
     };
 
     //Saves data to current user
-    const doUserData = async function addPerson(name, genero, site, username, id, base64) {
+    const doUserData = async function addPerson(name, genero, site, username, id) {
 
         const nameValue = name;
         const generoValue = genero;
         const siteValue = site;
         const usernameValue = username;
         const idValue = id
+        var parseFile;
 
-        //Encodes chosen picture
-        const parseFile = new Parse.File("nome", {base64});
-        if(nameValue && generoValue && siteValue && usernameValue !== ''){
+        try{
+          parseFile = new Parse.File("nome", {base64});
+        } catch(e){
+          console.log(e)
+        }
+
             // Verificando se usuario já tem dados
             try {
                 setSaving(true)
@@ -72,24 +79,31 @@ export const ArtistData = (props) => {
                 const newPerson = new Parse.Object('UserData');
                 newPerson.set('objectId', idValue);
                 //define the attributes you want for your Object
-                newPerson.set('name', nameValue);
-                newPerson.set('genero', generoValue);
-                newPerson.set('site', siteValue);
-                newPerson.set('username', usernameValue);
-                newPerson.set('picture', parseFile);
+                if(nameValue){
+                  newPerson.set('name', nameValue);
+                }
+                if(generoValue){
+                  newPerson.set('genero', generoValue);
+                }
+                if(siteValue){
+                  newPerson.set('site', siteValue);
+                }
+                if(usernameValue){
+                  newPerson.set('username', usernameValue);
+                }
+                if(parseFile !== null){
+                  newPerson.set('picture', parseFile);
+                }
+                // newPerson.set('picture', parseFile);
                 //save it on Back4App Data Store
                 await newPerson.save();
                 setSaving(false)
-                alert.Alert("Dados salvos :D")
+                Alert.alert("Dados salvos :D")
                 atualizar();
                 } catch (error) {
                     console.log('Error saving new person: ', error);
                 }
-            readData();
-            } else {
-        Alert.alert("Por favor, preencha todos os dados")
-    };
-    }
+      };
 
   return (
 
@@ -97,12 +111,17 @@ export const ArtistData = (props) => {
 
   <SafeAreaView style={{alignItems: "center"}}>
 
-  <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.inputArea}>
+  <KeyboardAvoidingView 
+    behavior={Platform.OS === "ios" ? "padding" : "height"} 
+    style={styles.inputArea}>
 
     {saving === true &&
-      <ActivityIndicator style={styles.indicator} size="large" color ="#0000ff"/> }
+      <ActivityIndicator 
+        style={styles.indicator} 
+        size="large" 
+        color ="#0000ff"/> }
 
-    {o.get('picture') && saving === false &&
+    {o.get('picture') && !image && saving === false &&
     <TouchableOpacity onPress={pickImage}>
           <Image style={styles.ProfilePic} 
                 source={ {uri: o.get('picture').url()} } 
@@ -111,7 +130,16 @@ export const ArtistData = (props) => {
     </TouchableOpacity>
     }
 
-    {!o.get('picture') && saving === false &&
+    {image && saving === false &&
+    <TouchableOpacity onPress={pickImage}>
+          <Image style={styles.ProfilePic} 
+                source={ { uri: image } } 
+                PlaceholderContent={<ActivityIndicator />}
+          />
+    </TouchableOpacity>
+    }
+
+    {!o.get('picture') && !image && saving === false &&
       <Image 
           style={styles.ProfilePic}
           source={require('../../../images/user_image_placeholder.png')}
@@ -147,7 +175,7 @@ export const ArtistData = (props) => {
     {saving === false &&
             <TouchableOpacity 
               style={styles.savebutton}
-              onPress={() => {doUserData(name, genero, site, username, o.id, base64)} }>
+              onPress={() => {doUserData(name, genero, site, username, o.id)} }>
               <Text style={styles.subtitle}>Salvar</Text>
             </TouchableOpacity>}
 

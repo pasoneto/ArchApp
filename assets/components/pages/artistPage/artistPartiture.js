@@ -42,12 +42,10 @@ export const ArtistPartitura = (props) => {
 
     if(readResults !== []){
         var userPartituras = readResults.filter((i)=>i.get('username') === username)
-        var numparts = userPartituras.length
     }
-    console.log(userPartituras.length)
-    // var partituras = a.map((i)=>i.get('name'))
 
-// Save score info
+    // var partituras = a.map((i)=>i.get('name'))
+    // Save score info
     const doUserData = async function addPerson(name, composer, spotify, username, lengthParts) {
 
         const nameValue = name;
@@ -123,7 +121,9 @@ export const ArtistPartitura = (props) => {
   return (
     <View style={styles.artistdata}>
 
-    <Text style={{textAlign: 'center', marginTop:10, width: 200}}>Suas partituras:</Text>
+        <Text 
+            style={{textAlign: 'center', marginTop:10, width: 200}}>Suas partituras:
+        </Text>
 
         <StyledPartList 
             object={userPartituras} 
