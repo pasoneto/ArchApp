@@ -7,7 +7,8 @@
       "**/*"
     ],
     "android": {
-      "package": "com.pasoneto.Archvix"
+      "package": "com.pasoneto.Archvix",
+      "softwareKeyboardLayoutMode": "pan"
     }
   },
   "name": "Archvix"

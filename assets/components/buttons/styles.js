@@ -18,15 +18,13 @@ const styles = StyleSheet.create({
     },
     icon: {
         alignSelf: 'center',
-        marginBottom: 5,
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
         textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 2,
     },
     boxPart: {
-        marginTop: 10,
         borderRadius: 5,
-        height: 170,
+        height: 100,
     },
     partList: {
         margin: 0,

@@ -124,10 +124,16 @@ export const ArtistPartitura = (props) => {
     <View style={styles.artistdata}>
 
     <Text style={{textAlign: 'center', marginTop:10, width: 200}}>Suas partituras:</Text>
-    
-    <StyledPartList object={userPartituras} onPress={doPartDelete}/>
 
-    <Text style={{textAlign: 'center', width: 200}}>Use os campos abaixo para adicionar mais partituras.</Text>
+        <StyledPartList 
+            object={userPartituras} 
+            onPress={doPartDelete}
+        />
+
+        <Text 
+            style={{textAlign: 'center', width: 200}}>
+              Use os campos abaixo para adicionar mais partituras.
+        </Text>
 
         <TextInput
             style={styles.TextInputArtist}
@@ -162,6 +168,7 @@ export const ArtistPartitura = (props) => {
             onPress={() => doUserData(name, composer, spotify, username, userPartituras.length)}>
             <Text style={styles.subtitle}>Salvar</Text>
         </TouchableOpacity>
+
 </View>
 
   );
