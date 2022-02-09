@@ -1,9 +1,12 @@
 import React, {FC, useEffect, ReactElement, useState} from 'react';
 import { ActivityIndicator } from 'react-native';
 import Parse from 'parse/react-native';
+import { Overlay, Button } from 'react-native-elements';
 import { TextInput, Modal, SafeAreaView, FlatList, Image, Alert, Text, KeyboardAvoidingView, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
 import * as ImagePicker from 'expo-image-picker';
+import ButtonOverlay from '../../buttons/buttonOverlay';
+import FrontPage from '../mainScreen/mainScreen';
 
 export const ArtistData = (props) => {
 
@@ -46,13 +49,14 @@ export const ArtistData = (props) => {
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
         base64: true,
-        maxHeight:  200,
-        maxWidth:  200,
+        // maxHeight:  200,
+        // maxWidth:  200,
         quality: 1,
       });
       if (!result.cancelled) {
         setBase64(result.base64);
         setImage(result.uri);
+        Alert.alert("Atenção!", "Você escolheu uma foto, mas ela ainda não foi salva no seu perfil. Verifique se o enquadramento da foto está boa, pois é assim que ela aparecerá no seu perfil público. Quando terminar, aperte o botão salvar.")
       }
     };
 
@@ -105,11 +109,25 @@ export const ArtistData = (props) => {
                 }
       };
 
+      const [visible, setVisible] = useState(false);
+
+      const toggleOverlay = () => {
+        setVisible(!visible);
+      };
+    
+    const artist = {
+        "CTA": "Partituras",
+        "first": "false",
+        "image": {uri: image},
+        "name": o.get('name'),
+        "partitura": "<iframe width=\"100%\" height=1500 src=\"https://musescore.com/user/36162467/scores/6360770/embed\" frameborder=\"0\" fullscreen\"></iframe>",
+      }
+
   return (
 
   <View style={styles.artistdata}>
 
-  <SafeAreaView style={{alignItems: "center"}}>
+  <View style={{alignItems: "center"}}>
 
   <KeyboardAvoidingView 
     behavior={Platform.OS === "ios" ? "padding" : "height"} 
@@ -137,6 +155,13 @@ export const ArtistData = (props) => {
                 PlaceholderContent={<ActivityIndicator />}
           />
     </TouchableOpacity>
+    }
+
+    {image && saving === false &&
+      <ButtonOverlay 
+        onPress={toggleOverlay}
+        content={"Verificar ajuste da foto"}
+        styleButton={styles.overlayButton}/>
     }
 
     {!o.get('picture') && !image && saving === false &&
@@ -179,8 +204,14 @@ export const ArtistData = (props) => {
               <Text style={styles.subtitle}>Salvar</Text>
             </TouchableOpacity>}
 
-
-        </SafeAreaView>
+    <Overlay isVisible={visible} fullScreen={false}>
+        <View style={{flex: 1, marginBottom: -10}}>
+        <FrontPage artist={artist}/>
+        <Button title="Ok" onPress={toggleOverlay}/>
+        </View>
+    </Overlay>
+    
+        </View>
       
 
       </View>

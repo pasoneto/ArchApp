@@ -6,7 +6,6 @@ import Partituras from '../../pages/partituras/partituraScreen';
 import {useNavigation} from '@react-navigation/native'
 
 const PartituraList = (props) => {
-    
     const name = props.route.params.name
     return(
         <View style={styles.page}>

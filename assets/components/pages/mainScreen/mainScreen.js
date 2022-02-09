@@ -8,7 +8,7 @@ import ArrowUp from '../../animations/arrow';
 const FrontPage = (props) => {
     
     const {name, CTA, image} = props.artist
-
+    // console.log(props.artist) 
     return(
       <View style={styles.page}>
       

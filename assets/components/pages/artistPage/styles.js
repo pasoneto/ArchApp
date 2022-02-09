@@ -208,6 +208,14 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         alignSelf: "center",
     },
+    overlayButton: {
+        alignSelf: 'center',
+        backgroundColor: "lightblue",
+        borderRadius: 50,
+        fontSize: 18,
+        width: '60%',
+        marginBottom: 5
+    },
     TextImage: {
         color: '#fff',
         textAlign: 'center',
