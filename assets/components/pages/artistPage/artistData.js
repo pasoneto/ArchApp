@@ -165,13 +165,18 @@ export const ArtistData = (props) => {
     }
 
     {!o.get('picture') && !image && saving === false &&
+    <TouchableOpacity onPress={pickImage}>
       <Image 
           style={styles.ProfilePic}
           source={require('../../../images/user_image_placeholder.png')}
           PlaceholderContent={<ActivityIndicator />}
       />
+    </TouchableOpacity>
     }
 
+    {saving === false &&
+      <Text>Nome</Text>
+    }
     {saving === false &&
         <TextInput
                 style={styles.TextInputArtist}
@@ -181,6 +186,9 @@ export const ArtistData = (props) => {
             />}
 
     {saving === false &&
+      <Text>Genero musical</Text>
+    }
+    {saving === false &&
         <TextInput
             style={styles.TextInputArtist}
             placeholder={o.get('genero')}
@@ -188,6 +196,9 @@ export const ArtistData = (props) => {
             onChangeText={(genero) => setGenero(genero)}
         />}
 
+    {saving === false &&
+      <Text>Spotify/Youtube</Text>
+    }
     {saving === false &&
         <TextInput
             style={styles.TextInputArtist}
