@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 10,
         margin: 5,
-        top: 110,
+        top: 10,
         textAlign: 'center',
         width: Dimensions.get("screen").width*0.8,
         height: 45,

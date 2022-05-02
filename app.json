@@ -3,12 +3,22 @@
     "name": "Archvix",
     "slug": "Archvix",
     "version": "1.0.0",
+    "icon": "./assets/images/icon.png",
     "assetBundlePatterns": [
       "**/*"
     ],
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFF",
+    },
     "android": {
       "package": "com.pasoneto.Archvix",
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#FFF"
+      }
     }
   },
   "name": "Archvix"

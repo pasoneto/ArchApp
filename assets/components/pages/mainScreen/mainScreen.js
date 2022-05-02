@@ -19,8 +19,9 @@ const FrontPage = (props) => {
 
         <View style={styles.titles}>
           <Text style={styles.title}>{name}</Text>
-          {props.artist.first == 'false' && <CtaButton style={styles.CTAbutton} content={CTA} whereto={"Partituras"} name={name}/>}
+          {props.artist.first == 'false' && props.artist.firstPage == 'false' && <CtaButton style={styles.CTAbutton} content={CTA} whereto={"Partituras"} name={name}/>}
           {props.artist.first == 'true' && <Text style={styles.subtitle}>{CTA}</Text>}
+          {props.artist.first == 'false' && props.artist.firstPage == 'true' && <Text style={styles.subtitle}>{CTA}</Text>}
         </View>
 
       <View style={styles.wrap}>
